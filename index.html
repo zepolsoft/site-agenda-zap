@@ -1,220 +1,391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AgendaZap — Agendamento automático pelo WhatsApp</title>
+<title>AgendaZap — Sua agenda no piloto automático, direto no WhatsApp</title>
+<meta name="description" content="AgendaZap usa Inteligência Artificial para agendar, confirmar e lembrar seus clientes automaticamente pelo WhatsApp. Ideal para barbearias, farmácias, clínicas, dentistas, academias e restaurantes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --bg: #16302a;
-    --bg-panel: #1e3d34;
-    --gold: #e3a73f;
-    --text: #f4efe1;
-    --text-muted: #b9c4bc;
-    --chat-bg: #f4efe1;
-    --chat-bot: #1e3d34;
+    --bg: #0E1712;
+    --bg-soft: #13201A;
+    --panel: #17281F;
+    --panel-2: #1E3327;
+    --cream: #F2ECDD;
+    --cream-dim: #C9D2CB;
+    --orange: #E7A33E;
+    --orange-dim: #C97F1E;
+    --mint: #6EE7B7;
+    --blue: #7C9CFF;
+    --border: rgba(242,236,221,0.10);
+    --radius: 18px;
+    --shadow: 0 20px 60px rgba(0,0,0,0.35);
   }
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Work Sans', sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Work Sans', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  h1, h2, .brand{ font-family: 'Fraunces', serif; }
-  a{ color: inherit; }
-  .wrap{ max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+  }
+  p{margin:0; color:var(--cream-dim); line-height:1.6;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 24px;}
+
+  /* Ambient AI glow background */
+  .glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  }
+  .glow::before, .glow::after{
+    content:''; position:absolute; border-radius:50%; filter:blur(90px); opacity:0.28;
+  }
+  .glow::before{
+    width:560px; height:560px; background:var(--orange); top:-180px; left:-120px;
+    animation:float1 16s ease-in-out infinite;
+  }
+  .glow::after{
+    width:620px; height:620px; background:var(--blue); bottom:-220px; right:-160px;
+    animation:float2 18s ease-in-out infinite;
+  }
+  @keyframes float1{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(40px,50px);} }
+  @keyframes float2{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(-50px,-30px);} }
+
+  .dots{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(242,236,221,0.10) 1px, transparent 1px);
+    background-size:26px 26px;
+    mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, black 40%, transparent 80%);
+  }
 
   header{
+    position:sticky; top:0; z-index:20;
+    backdrop-filter:blur(10px);
+    background:rgba(14,23,18,0.75);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding: 28px 0;
+    padding:16px 24px; max-width:1160px; margin:0 auto;
   }
-  .brand{ font-size: 1.4rem; font-weight: 600; letter-spacing: 0.01em; }
-  .brand span{ color: var(--gold); }
-  nav a{
-    text-decoration:none; color: var(--text-muted); font-size: 0.95rem;
-    margin-left: 28px; transition: color .15s ease;
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:20px;}
+  .brand .zap{color:var(--orange);}
+  .brand svg{display:block;}
+  .nav-links{display:flex; align-items:center; gap:28px; font-size:15px; color:var(--cream-dim);}
+  .nav-links a:hover{color:var(--cream);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:100px; font-weight:600; font-size:15px;
+    border:1px solid transparent; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;
   }
-  nav a:hover{ color: var(--text); }
+  .btn-primary{ background:var(--orange); color:#1B1305; box-shadow:0 8px 24px rgba(231,163,62,0.25);}
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(231,163,62,0.35);}
+  .btn-ghost{ border-color:var(--border); color:var(--cream); }
+  .btn-ghost:hover{ background:rgba(242,236,221,0.06); }
 
-  .hero{
-    display:grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
-    align-items:center; padding: 56px 0 88px;
-  }
-  .hero h1{
-    font-size: clamp(2.1rem, 4vw, 3.1rem);
-    font-weight: 500; line-height: 1.15; margin: 0 0 22px;
-    max-width: 15ch;
-  }
-  .hero p{
-    color: var(--text-muted); font-size: 1.08rem; max-width: 42ch; margin: 0 0 32px;
-  }
-  .cta{
-    display:inline-flex; align-items:center; gap:10px;
-    background: var(--gold); color: #1c1103; text-decoration:none;
-    font-weight: 600; font-size: 1rem; padding: 14px 26px; border-radius: 999px;
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .cta:hover{ transform: translateY(-1px); box-shadow: 0 8px 24px rgba(227,167,63,0.25); }
+  section{position:relative; z-index:1;}
 
+  .hero{padding:88px 0 60px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:7px 14px; border-radius:100px; border:1px solid var(--border);
+    background:rgba(110,231,183,0.08); color:var(--mint); font-size:13px; font-weight:600;
+    letter-spacing:.02em; margin-bottom:22px;
+  }
+  .badge svg{width:14px; height:14px;}
+  .hero h1{font-size:52px; letter-spacing:-0.01em; margin-bottom:20px;}
+  .hero h1 .accent{color:var(--orange);}
+  .hero p.lead{font-size:18px; max-width:480px; margin-bottom:32px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .verticals-inline{display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:var(--cream-dim);}
+  .verticals-inline span{
+    padding:6px 12px; border:1px solid var(--border); border-radius:100px; background:rgba(255,255,255,0.03);
+  }
+
+  /* chat mock */
   .phone{
-    background: var(--bg-panel);
-    border-radius: 28px;
-    padding: 18px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-    justify-self: center;
-    width: 100%; max-width: 340px;
+    background:var(--panel); border:1px solid var(--border); border-radius:26px;
+    padding:22px; box-shadow:var(--shadow);
+    position:relative;
   }
-  .phone .screen{
-    background: var(--chat-bg);
-    border-radius: 18px;
-    padding: 18px 14px;
-    display: flex; flex-direction: column; gap: 10px;
-    min-height: 300px;
+  .phone::before{
+    content:''; position:absolute; inset:-1px; border-radius:26px; padding:1px;
+    background:linear-gradient(135deg, rgba(231,163,62,0.5), rgba(124,156,255,0.35), transparent 60%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none;
   }
-  .bubble{
-    max-width: 82%;
-    padding: 10px 14px;
-    border-radius: 14px;
-    font-size: 0.92rem;
-    color: #16302a;
-  }
-  .bubble.client{
-    align-self: flex-end;
-    background: #ffffff;
-    border-bottom-right-radius: 4px;
-  }
-  .bubble.bot{
-    align-self: flex-start;
-    background: var(--gold);
-    border-bottom-left-radius: 4px;
-    color: #1c1103;
-  }
-  .typing{
-    align-self: flex-start; color: #7a8a82; font-size: 0.8rem; padding-left: 4px;
+  .chat-head{display:flex; align-items:center; gap:10px; padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:16px;}
+  .chat-avatar{width:36px; height:36px; border-radius:50%; background:var(--panel-2); display:flex; align-items:center; justify-content:center;}
+  .chat-name{font-weight:600; font-size:14px;}
+  .chat-status{font-size:12px; color:var(--mint);}
+  .bubble{max-width:82%; padding:11px 14px; border-radius:14px; font-size:14px; margin-bottom:10px; line-height:1.45;}
+  .bubble.in{background:var(--panel-2); border-bottom-left-radius:4px;}
+  .bubble.out{background:var(--orange); color:#1B1305; margin-left:auto; border-bottom-right-radius:4px; font-weight:500;}
+  .typing{display:inline-flex; gap:4px; padding:6px 2px;}
+  .typing span{width:6px; height:6px; border-radius:50%; background:var(--cream-dim); animation:blink 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{ 0%,80%,100%{opacity:.25;} 40%{opacity:1;} }
+
+  .logos{padding:34px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .logos-row{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
+  .logo-pill{
+    display:flex; align-items:center; gap:8px; padding:9px 16px; border-radius:100px;
+    border:1px solid var(--border); background:rgba(255,255,255,0.03); font-size:14px; color:var(--cream-dim);
   }
 
-  section{ padding: 64px 0; border-top: 1px solid rgba(244,239,225,0.08); }
-  section h2{
-    font-size: 1.7rem; font-weight: 500; margin: 0 0 36px;
-  }
+  .section-head{max-width:620px; margin:0 auto 48px; text-align:center;}
+  .eyebrow{display:block; color:var(--orange); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;}
+  .section-head h2{font-size:36px; margin-bottom:14px;}
 
-  .steps{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    list-style:none; margin:0; padding:0; counter-reset: step;
+  .how{padding:96px 0;}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .step{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:28px 24px; position:relative;
   }
-  .steps li{ counter-increment: step; }
-  .steps li::before{
-    content: counter(step);
+  .step-num{
+    width:38px; height:38px; border-radius:10px; background:var(--panel-2); color:var(--orange);
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; margin-bottom:18px;
+  }
+  .step h3{font-size:19px; margin-bottom:8px;}
+  .step p{font-size:14.5px;}
+
+  .benefits{padding:96px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .benefit-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .benefit{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:24px;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .benefit:hover{ transform:translateY(-3px); border-color:rgba(231,163,62,0.4); }
+  .benefit-icon{
+    width:40px; height:40px; border-radius:10px; margin-bottom:14px;
     display:flex; align-items:center; justify-content:center;
-    width: 34px; height: 34px; border-radius: 50%;
-    border: 1px solid var(--gold); color: var(--gold);
-    font-family: 'Fraunces', serif; font-size: 0.95rem;
-    margin-bottom: 16px;
+    background:linear-gradient(135deg, rgba(231,163,62,0.18), rgba(124,156,255,0.18));
+    color:var(--orange);
   }
-  .steps h3{ margin: 0 0 8px; font-size: 1.05rem; font-weight: 600; }
-  .steps p{ margin:0; color: var(--text-muted); font-size: 0.95rem; }
+  .benefit h3{font-size:16.5px; font-family:'Work Sans',sans-serif; font-weight:600; margin-bottom:6px; color:var(--cream);}
+  .benefit p{font-size:14px;}
 
-  .tags{ display:flex; flex-wrap:wrap; gap: 12px; }
-  .tags span{
-    border: 1px solid rgba(244,239,225,0.18);
-    color: var(--text-muted);
-    padding: 9px 18px; border-radius: 999px; font-size: 0.92rem;
+  .cta-band{padding:80px 0;}
+  .cta-card{
+    background:linear-gradient(135deg, var(--panel-2), var(--panel));
+    border:1px solid var(--border); border-radius:24px; padding:56px 40px; text-align:center;
+    position:relative; overflow:hidden;
   }
-
-  footer{
-    padding: 40px 0 56px;
-    display:flex; justify-content:space-between; align-items:center;
-    flex-wrap: wrap; gap: 16px;
-    color: var(--text-muted); font-size: 0.88rem;
-    border-top: 1px solid rgba(244,239,225,0.08);
+  .cta-card::after{
+    content:''; position:absolute; width:360px; height:360px; border-radius:50%;
+    background:var(--orange); opacity:.14; filter:blur(70px); top:-140px; right:-100px;
   }
-  footer a{ text-decoration: none; color: var(--text); }
-  footer a:hover{ color: var(--gold); }
+  .cta-card h2{font-size:32px; margin-bottom:14px; position:relative;}
+  .cta-card p{max-width:480px; margin:0 auto 28px; position:relative;}
+  .cta-card .btn{position:relative;}
 
-  @media (max-width: 760px){
-    .hero{ grid-template-columns: 1fr; padding-top: 24px; }
-    .phone{ order: -1; max-width: 280px; }
-    .steps{ grid-template-columns: 1fr; }
-    nav a{ margin-left: 18px; }
+  footer{padding:40px 0; border-top:1px solid var(--border);}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13.5px; color:var(--cream-dim);}
+  .foot-brand{display:flex; align-items:center; gap:8px; font-family:'Fraunces',serif; font-weight:700; color:var(--cream);}
+
+  @media (max-width:880px){
+    .hero-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:38px;}
+    .steps, .benefit-grid{grid-template-columns:1fr;}
+    .section-head h2{font-size:28px;}
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <header>
-    <div class="brand">Agenda<span>Zap</span></div>
-    <nav>
+<div class="glow"><div class="dots"></div></div>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="44" y="48" width="112" height="104" rx="20" fill="#F2ECDD"/>
+        <rect x="68" y="34" width="12" height="26" rx="6" fill="#F2ECDD"/>
+        <rect x="120" y="34" width="12" height="26" rx="6" fill="#F2ECDD"/>
+        <g transform="translate(38,6) scale(1.35)">
+          <path d="M62 2 L14 58 H46 L38 98 L86 42 H54 Z" fill="#E7A33E" stroke="#0E1712" stroke-width="3" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      Agenda<span class="zap">Zap</span>
+    </div>
+    <nav class="nav-links">
       <a href="#como-funciona">Como funciona</a>
+      <a href="#beneficios">Benefícios</a>
       <a href="#contato">Contato</a>
     </nav>
-  </header>
+    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
 
-  <section class="hero" style="border:none; padding-top:0;">
+<section class="hero">
+  <div class="wrap hero-grid">
     <div>
-      <h1>Seu negócio agenda sozinho, direto no WhatsApp.</h1>
-      <p>Farmácias, barbearias, clínicas, dentistas e academias usam a AgendaZap para responder, marcar e confirmar horários automaticamente — sem deixar nenhum cliente esperando.</p>
-      <a class="cta" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
-    </div>
-    <div class="phone">
-      <div class="screen">
-        <div class="bubble client">Oi! Queria marcar um horário pra sexta à tarde</div>
-        <div class="bubble bot">Perfeito! Sexta às 15h está livre — confirmo pra você?</div>
-        <div class="bubble client">Sim, pode confirmar</div>
-        <div class="bubble bot">Agendado! Te espero sexta às 15h 🙂</div>
-        <div class="typing">digitando…</div>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Automação com Inteligência Artificial
+      </span>
+      <h1>Sua agenda funciona <span class="accent">sozinha</span>, direto no WhatsApp.</h1>
+      <p class="lead">O AgendaZap usa IA pra conversar com seus clientes, marcar, confirmar e lembrar horários automaticamente — sem ligação, sem app novo, sem ninguém da equipe parado no telefone.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
+        <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+      </div>
+      <div class="verticals-inline">
+        <span>Barbearias</span><span>Farmácias</span><span>Clínicas</span>
+        <span>Dentistas</span><span>Academias</span><span>Restaurantes</span>
       </div>
     </div>
-  </section>
-</div>
 
-<section id="como-funciona">
-  <div class="wrap">
-    <h2>Como funciona</h2>
-    <ol class="steps">
-      <li>
-        <h3>Cliente manda mensagem</h3>
-        <p>Pelo WhatsApp do seu negócio, do jeito que ele já usa todo dia — sem baixar nada novo.</p>
-      </li>
-      <li>
-        <h3>A automação verifica e agenda</h3>
-        <p>Confere a agenda em tempo real e já reserva o horário, ou sugere outro se estiver ocupado.</p>
-      </li>
-      <li>
-        <h3>Confirmação na hora</h3>
-        <p>O cliente recebe a confirmação na mesma conversa — e um lembrete, mais perto da data.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Para negócios como o seu</h2>
-    <div class="tags">
-      <span>Farmácias</span>
-      <span>Barbearias</span>
-      <span>Clínicas</span>
-      <span>Dentistas</span>
-      <span>Academias</span>
-      <span>Restaurantes</span>
+    <div class="phone">
+      <div class="chat-head">
+        <div class="chat-avatar">
+          <svg width="18" height="18" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="44" y="48" width="112" height="104" rx="20" fill="#F2ECDD"/>
+            <g transform="translate(38,6) scale(1.35)"><path d="M62 2 L14 58 H46 L38 98 L86 42 H54 Z" fill="#E7A33E"/></g>
+          </svg>
+        </div>
+        <div>
+          <div class="chat-name">AgendaZap</div>
+          <div class="chat-status">● Respondendo agora</div>
+        </div>
+      </div>
+      <div class="bubble out">Oi! Queria marcar um horário pra sexta à tarde</div>
+      <div class="bubble in">Perfeito! Sexta às 15h está livre — posso confirmar pra você?</div>
+      <div class="bubble out">Sim, pode confirmar</div>
+      <div class="bubble in">Agendado! Te espero sexta às 15h 🙂</div>
+      <div class="bubble in"><div class="typing"><span></span><span></span><span></span></div></div>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <footer id="contato">
-    <div>© 2026 AgendaZap</div>
-    <div><a href="https://wa.me/5511925022244" target="_blank" rel="noopener">+55 11 92502-2244</a></div>
-  </footer>
-</div>
+<section class="logos">
+  <div class="wrap logos-row">
+    <div class="logo-pill">💈 Barbearias</div>
+    <div class="logo-pill">💊 Farmácias</div>
+    <div class="logo-pill">🩺 Clínicas</div>
+    <div class="logo-pill">🦷 Dentistas</div>
+    <div class="logo-pill">🏋️ Academias</div>
+    <div class="logo-pill">🍽️ Restaurantes</div>
+  </div>
+</section>
+
+<section class="how" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Três passos, zero esforço manual</h2>
+      <p>O cliente nem percebe que está falando com uma automação — só sente que foi atendido na hora.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Cliente manda mensagem</h3>
+        <p>Pelo WhatsApp do seu negócio, do jeito que ele já usa todo dia — sem baixar nada novo.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>A IA entende e verifica</h3>
+        <p>Interpreta o que o cliente quer, confere a agenda em tempo real e propõe (ou ajusta) um horário.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Confirma e lembra sozinho</h3>
+        <p>Agenda só depois do "sim" do cliente, e envia lembrete automático mais perto da data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits" id="beneficios">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Benefícios</span>
+      <h2>O que muda no seu negócio</h2>
+      <p>Menos tempo perdido no telefone, menos falta de cliente, mais controle da agenda.</p>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Atendimento 24 horas</h3>
+        <p>O cliente agenda a qualquer hora, mesmo depois do expediente — sem ninguém precisar responder.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m5 14V9m5 10V4m5 15v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Menos faltas na agenda</h3>
+        <p>Lembretes automáticos antes do horário reduzem o famoso "esqueci que tinha marcado".</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 21a8 8 0 1 0-16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Equipe livre pro que importa</h3>
+        <p>Ninguém precisa parar o atendimento presencial pra responder WhatsApp ou telefone.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Agenda sempre organizada</h3>
+        <p>Cada agendamento, remarcação e cancelamento é registrado automaticamente — sem planilha manual.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 15l4-5 3 3 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Visão clara do negócio</h3>
+        <p>Histórico de agendamentos e faturamento organizado, pronto pra acompanhar quando quiser.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Feito pro seu tipo de negócio</h3>
+        <p>Configurado com os serviços, preços e horários reais do seu estabelecimento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="contato">
+  <div class="wrap">
+    <div class="cta-card">
+      <h2>Pronto pra sua agenda trabalhar sozinha?</h2>
+      <p>Fala com a gente no WhatsApp e veja como fica o AgendaZap funcionando no seu negócio.</p>
+      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">
+      <svg width="20" height="20" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="44" y="48" width="112" height="104" rx="20" fill="#F2ECDD"/>
+        <g transform="translate(38,6) scale(1.35)"><path d="M62 2 L14 58 H46 L38 98 L86 42 H54 Z" fill="#E7A33E"/></g>
+      </svg>
+      AgendaZap
+    </div>
+    <span>© 2026 AgendaZap. Automação de agendamento via WhatsApp.</span>
+    <a href="https://wa.me/5511925022244" target="_blank" rel="noopener">+55 11 92502-2244</a>
+  </div>
+</footer>
 
 </body>
 </html>

@@ -182,7 +182,10 @@
   .mobile-menu a{padding:12px 4px; font-size:15px; border-bottom:1px solid var(--border); color:var(--cream-dim);}
   .mobile-menu a:last-child{border-bottom:none;}
   .mobile-menu .btn-primary{
-    display:flex; justify-content:center; margin:4px 0 12px; border-bottom:none; color:#1B1305;
+    display:flex; justify-content:center; margin:4px 0 8px; border-bottom:none; color:#1B1305;
+  }
+  .mobile-menu .btn-ghost{
+    display:flex; justify-content:center; margin:0 0 12px; border-bottom:none;
   }
 
   section{position:relative; z-index:1;}
@@ -200,8 +203,10 @@
   .hero h1 .accent{color:var(--orange);}
   .hero p.lead{font-size:18px; max-width:480px; margin-bottom:32px;}
   .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
-  .hero-note{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--cream-dim); margin-bottom:32px;}
+  .hero-note{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--cream-dim); margin-bottom:14px;}
   .hero-note svg{color:var(--mint); flex:none;}
+  .hero-more-link{display:inline-block; font-size:13.5px; color:var(--cream-dim); text-decoration:underline; text-underline-offset:3px; margin-bottom:28px;}
+  .hero-more-link:hover{color:var(--cream);}
   .verticals-inline{display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:var(--cream-dim);}
   .verticals-inline span{
     padding:6px 12px; border:1px solid var(--border); border-radius:100px; background:rgba(255,255,255,0.03);
@@ -391,6 +396,7 @@
   .cta-card h2{font-size:32px; margin-bottom:14px; position:relative;}
   .cta-card p{max-width:480px; margin:0 auto 28px; position:relative;}
   .cta-card .btn{position:relative;}
+  .cta-buttons{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative;}
 
   footer{padding:40px 0; border-top:1px solid var(--border);}
   .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13.5px; color:var(--cream-dim);}
@@ -450,14 +456,15 @@
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-right">
-      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração</a>
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu">
-    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
+    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
+    <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#pos-agendamento">Lembretes e remarcação</a>
     <a href="#beneficios">Benefícios</a>
@@ -477,13 +484,14 @@
       <h1>Sua agenda funciona <span class="accent">sozinha</span>, direto no WhatsApp.</h1>
       <p class="lead">O AgendaZap usa IA pra conversar com seus clientes, marcar, confirmar e lembrar horários automaticamente — sem ligação, sem app novo, sem ninguém da equipe parado no telefone.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
-        <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
+        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
       </div>
       <div class="hero-note">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Sem instalar nada — funciona no WhatsApp que você já usa
       </div>
+      <a class="hero-more-link" href="#como-funciona">Ver como funciona ↓</a>
       <div class="verticals-inline">
         <span>Barbearias</span><span>Farmácias</span><span>Clínicas</span>
         <span>Dentistas</span><span>Academias</span><span>Restaurantes</span>
@@ -716,8 +724,11 @@
   <div class="wrap">
     <div class="cta-card reveal">
       <h2>Pronto pra sua agenda trabalhar sozinha?</h2>
-      <p>Fala com a gente no WhatsApp e veja como fica o AgendaZap funcionando no seu negócio.</p>
-      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
+      <p>Testa a demonstração no WhatsApp e veja como fica o AgendaZap funcionando, ou fala direto comigo pra colocar no seu negócio.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
+        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
+      </div>
     </div>
   </div>
 </section>
@@ -737,7 +748,7 @@
       <a href="#faq">FAQ</a>
     </nav>
     <span>© 2026 AgendaZap. Automação de agendamento via WhatsApp.</span>
-    <a href="https://wa.me/5511925022244" target="_blank" rel="noopener">+55 11 92502-2244</a>
+    <a href="https://wa.me/5511975049937" target="_blank" rel="noopener">+55 11 97504-9937</a>
   </div>
 </footer>
 

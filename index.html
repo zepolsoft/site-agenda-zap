@@ -181,6 +181,9 @@
   .mobile-menu.open{display:flex;}
   .mobile-menu a{padding:12px 4px; font-size:15px; border-bottom:1px solid var(--border); color:var(--cream-dim);}
   .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu .btn-primary{
+    display:flex; justify-content:center; margin:4px 0 12px; border-bottom:none; color:#1B1305;
+  }
 
   section{position:relative; z-index:1;}
 
@@ -408,6 +411,11 @@
     .nav-links{display:none;}
     .menu-btn{display:flex;}
   }
+  @media (max-width:560px){
+    .nav-right .btn-primary{display:none;}
+    .brand{font-size:18px; gap:8px;}
+    .nav{padding:14px 16px;}
+  }
   @media (max-width:880px){
     .hero-grid{grid-template-columns:1fr;}
     .hero h1{font-size:38px;}
@@ -449,6 +457,7 @@
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu">
+    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#pos-agendamento">Lembretes e remarcação</a>
     <a href="#beneficios">Benefícios</a>

@@ -204,36 +204,80 @@
     padding:6px 12px; border:1px solid var(--border); border-radius:100px; background:rgba(255,255,255,0.03);
   }
 
-  /* chat mock */
+  /* chat mock — estilo WhatsApp (modo escuro) */
+  :root{
+    --wa-header: #1F2C34;
+    --wa-bg: #0B141A;
+    --wa-out: #005C4B;
+    --wa-in: #1F2C34;
+    --wa-tick: #53BDEB;
+  }
   .phone{
-    background:var(--panel); border:1px solid var(--border); border-radius:26px;
-    padding:22px; box-shadow:var(--shadow);
-    position:relative;
+    background:var(--wa-header); border:1px solid var(--border); border-radius:26px;
+    padding:0; box-shadow:var(--shadow);
+    position:relative; overflow:hidden;
   }
   .phone::before{
     content:''; position:absolute; inset:-1px; border-radius:26px; padding:1px;
     background:linear-gradient(135deg, rgba(231,163,62,0.5), rgba(124,156,255,0.35), transparent 60%);
     -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none;
+    -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; z-index:5;
   }
-  .chat-head{display:flex; align-items:center; gap:10px; padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:16px;}
-  .chat-avatar{width:36px; height:36px; border-radius:50%; background:var(--panel-2); display:flex; align-items:center; justify-content:center;}
-  .chat-name{font-weight:600; font-size:14px;}
-  .chat-status{font-size:12px; color:var(--mint);}
-  .chat-body{min-height:230px;}
-  .bubble{max-width:82%; padding:11px 14px; border-radius:14px; font-size:14px; margin-bottom:10px; line-height:1.45;
-    opacity:0; transform:translateY(6px); animation:pop .3s ease forwards;}
-  .bubble.in{background:var(--panel-2); border-bottom-left-radius:4px;}
-  .bubble.out{background:var(--orange); color:#1B1305; margin-left:auto; border-bottom-right-radius:4px; font-weight:500;}
+  .chat-head{
+    display:flex; align-items:center; gap:10px; padding:14px 16px;
+    background:var(--wa-header); position:relative; z-index:2;
+  }
+  .chat-back{color:#8696A0; flex:none;}
+  .chat-avatar{width:34px; height:34px; border-radius:50%; background:#2A3942; display:flex; align-items:center; justify-content:center; flex:none;}
+  .chat-name{font-weight:600; font-size:14.5px; color:#E9EDEF;}
+  .chat-status{font-size:12px; color:#8696A0;}
+  .chat-icons{margin-left:auto; display:flex; align-items:center; gap:18px; color:#8696A0;}
+
+  .chat-body{
+    min-height:280px; padding:16px 14px 10px;
+    background-color:var(--wa-bg);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:26px 26px;
+    background-position:0 0, 13px 13px;
+  }
+  .bubble{
+    max-width:80%; padding:7px 8px 8px 9px; border-radius:8px; font-size:13.6px; margin-bottom:8px; line-height:1.4;
+    opacity:0; transform:translateY(6px); animation:pop .3s ease forwards; position:relative;
+    box-shadow:0 1px 1px rgba(0,0,0,0.3);
+  }
+  .bubble.in{background:var(--wa-in); color:#E9EDEF; border-top-left-radius:2px;}
+  .bubble.out{background:var(--wa-out); color:#E9EDEF; margin-left:auto; border-top-right-radius:2px;}
+  .bubble .msg-text{padding-right:52px; display:inline;}
+  .bubble .msg-meta{
+    float:right; margin-top:2px; margin-left:6px; font-size:10.5px; color:rgba(233,237,239,0.6);
+    display:inline-flex; align-items:center; gap:3px; transform:translateY(9px);
+  }
+  .bubble.out .msg-meta svg{color:var(--wa-tick);}
   @keyframes pop{ to{opacity:1; transform:translateY(0);} }
   .chat-body .bubble:nth-child(1){animation-delay:.1s;}
   .chat-body .bubble:nth-child(2){animation-delay:.6s;}
   .chat-body .bubble:nth-child(3){animation-delay:1.05s;}
   .chat-body .bubble:nth-child(4){animation-delay:1.55s;}
-  .typing{display:inline-flex; gap:4px; padding:6px 2px;}
-  .typing span{width:6px; height:6px; border-radius:50%; background:var(--cream-dim); animation:blink 1.2s infinite;}
+  .typing{display:inline-flex; gap:4px; padding:4px 2px;}
+  .typing span{width:6px; height:6px; border-radius:50%; background:#8696A0; animation:blink 1.2s infinite;}
   .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
   @keyframes blink{ 0%,80%,100%{opacity:.25;} 40%{opacity:1;} }
+
+  .chat-input-bar{
+    display:flex; align-items:center; gap:10px; padding:10px 12px 14px;
+    background:var(--wa-header); position:relative; z-index:2;
+  }
+  .chat-input-pill{
+    flex:1; display:flex; align-items:center; gap:10px; background:#2A3942; border-radius:100px;
+    padding:9px 14px; color:#8696A0; font-size:13px;
+  }
+  .chat-input-pill span{flex:1;}
+  .chat-input-bar .mic-btn{
+    width:34px; height:34px; border-radius:50%; background:#00A884; display:flex; align-items:center; justify-content:center;
+    flex:none; color:#0B141A;
+  }
 
   .logos{padding:34px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .logos-row{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
@@ -439,6 +483,7 @@
 
     <div class="phone">
       <div class="chat-head">
+        <svg class="chat-back" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="chat-avatar">
           <svg width="18" height="18" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <rect x="44" y="48" width="112" height="104" rx="20" fill="#F2ECDD"/>
@@ -447,14 +492,28 @@
         </div>
         <div>
           <div class="chat-name">AgendaZap</div>
-          <div class="chat-status">● Respondendo agora</div>
+          <div class="chat-status">online</div>
+        </div>
+        <div class="chat-icons">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 10l5-3v10l-5-3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="2" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8"/></svg>
         </div>
       </div>
       <div class="chat-body" id="chatBody">
-        <div class="bubble out">Oi! Queria marcar um horário pra sexta à tarde</div>
-        <div class="bubble in">Perfeito! Sexta às 15h está livre — posso confirmar pra você?</div>
-        <div class="bubble out">Sim, pode confirmar</div>
-        <div class="bubble in">Agendado! Te espero sexta às 15h 🙂</div>
+        <div class="bubble out"><span class="msg-text">Oi! Queria marcar um horário pra sexta à tarde</span><span class="msg-meta">10:29<svg width="15" height="10" viewBox="0 0 16 11" fill="none"><path d="M1 5.5L4.5 9 11 1.5M5 5.5L8.5 9 15 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="bubble in"><span class="msg-text">Perfeito! Sexta às 15h está livre — posso confirmar pra você?</span><span class="msg-meta">10:29</span></div>
+        <div class="bubble out"><span class="msg-text">Sim, pode confirmar</span><span class="msg-meta">10:30<svg width="15" height="10" viewBox="0 0 16 11" fill="none"><path d="M1 5.5L4.5 9 11 1.5M5 5.5L8.5 9 15 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="bubble in"><span class="msg-text">Agendado! Te espero sexta às 15h 🙂</span><span class="msg-meta">10:30</span></div>
+      </div>
+      <div class="chat-input-bar">
+        <div class="chat-input-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 9h.01M15 9h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Mensagem</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21.44 11.05l-9.19 9.19a5.5 5.5 0 0 1-7.78-7.78l9.2-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="mic-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z" stroke="currentColor" stroke-width="1.8"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
       </div>
     </div>
   </div>
@@ -705,6 +764,24 @@
     ]
   ];
   const wait = ms => new Promise(r => setTimeout(r, ms));
+  const CHECKS_SVG = '<svg width="15" height="10" viewBox="0 0 16 11" fill="none"><path d="M1 5.5L4.5 9 11 1.5M5 5.5L8.5 9 15 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function nextClockTime(){
+    // simple rolling fake clock so timestamps look plausible without being real
+    window.__waClock = window.__waClock || { h: 10, m: 29 };
+    window.__waClock.m += Math.random() > 0.6 ? 1 : 0;
+    if(window.__waClock.m > 59){ window.__waClock.m = 0; window.__waClock.h++; }
+    const h = String(window.__waClock.h).padStart(2,'0');
+    const m = String(window.__waClock.m).padStart(2,'0');
+    return h + ':' + m;
+  }
+  function buildBubble(who, text){
+    const b = document.createElement('div');
+    b.className = 'bubble ' + who;
+    const time = nextClockTime();
+    b.innerHTML = '<span class="msg-text"></span><span class="msg-meta">' + time + (who === 'out' ? CHECKS_SVG : '') + '</span>';
+    b.querySelector('.msg-text').textContent = text;
+    return b;
+  }
   async function playConversation(list){
     const chat = document.getElementById('chatBody');
     if(!chat) return;
@@ -717,16 +794,10 @@
         chat.appendChild(typing);
         await wait(550);
         typing.remove();
-        const b = document.createElement('div');
-        b.className = 'bubble in';
-        b.textContent = msg.text;
-        chat.appendChild(b);
+        chat.appendChild(buildBubble('in', msg.text));
         await wait(450);
       } else {
-        const b = document.createElement('div');
-        b.className = 'bubble out';
-        b.textContent = msg.text;
-        chat.appendChild(b);
+        chat.appendChild(buildBubble('out', msg.text));
         await wait(600);
       }
     }

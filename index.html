@@ -5,8 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AgendaZap — Sua agenda no piloto automático, direto no WhatsApp</title>
 <meta name="description" content="AgendaZap usa Inteligência Artificial para agendar, confirmar e lembrar seus clientes automaticamente pelo WhatsApp. Ideal para barbearias, farmácias, clínicas, dentistas, academias e restaurantes.">
+<link rel="canonical" href="https://agendazap.com.br/">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AgendaZap">
+<meta property="og:title" content="AgendaZap — Sua agenda no piloto automático, direto no WhatsApp">
+<meta property="og:description" content="IA que agenda, confirma e lembra seus clientes automaticamente pelo WhatsApp — sem app novo, sem ninguém parado no telefone.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AgendaZap — Sua agenda no piloto automático, direto no WhatsApp">
+<meta name="twitter:description" content="IA que agenda, confirma e lembra seus clientes automaticamente pelo WhatsApp.">
+<meta name="twitter:image" content="og-image.png">
+
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="theme-color" content="#0E1712">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AgendaZap",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, WhatsApp",
+  "description": "Automação com Inteligência Artificial que agenda, confirma e lembra clientes automaticamente pelo WhatsApp.",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "BRL",
+    "url": "https://wa.me/5511925022244"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Preciso instalar algum aplicativo?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Não. O AgendaZap funciona dentro do WhatsApp que o seu negócio já usa — não é preciso instalar nada, nem para você, nem para o cliente." }
+    },
+    {
+      "@type": "Question",
+      "name": "Funciona pra qualquer tipo de negócio?",
+      "acceptedAnswer": { "@type": "Answer", "text": "É configurado sob medida para o seu segmento — barbearias, clínicas, dentistas, academias, farmácias e restaurantes — com os serviços, preços e horários reais do seu estabelecimento." }
+    },
+    {
+      "@type": "Question",
+      "name": "E se o cliente quiser cancelar ou remarcar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A mesma conversa no WhatsApp resolve: o cliente pede a mudança, a IA confere a agenda e confirma — sem precisar ligar ou falar com alguém da equipe." }
+    },
+    {
+      "@type": "Question",
+      "name": "Como o AgendaZap evita que o cliente falte?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Envia lembretes automáticos antes do horário marcado, e se o cliente responder pedindo para cancelar ou remarcar, a agenda já é atualizada na hora." }
+    },
+    {
+      "@type": "Question",
+      "name": "Minha agenda continua no Google Calendar?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. O AgendaZap se integra ao Google Calendar e mantém uma planilha organizada com o histórico de todos os agendamentos, sem trabalho manual." }
+    }
+  ]
+}
+</script>
+
 <style>
   :root{
     --bg: #0E1712;
@@ -69,7 +137,7 @@
   }
 
   header{
-    position:sticky; top:0; z-index:20;
+    position:sticky; top:0; z-index:30;
     backdrop-filter:blur(10px);
     background:rgba(14,23,18,0.75);
     border-bottom:1px solid var(--border);
@@ -81,8 +149,20 @@
   .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:20px;}
   .brand .zap{color:var(--orange);}
   .brand svg{display:block;}
-  .nav-links{display:flex; align-items:center; gap:28px; font-size:15px; color:var(--cream-dim);}
+  .nav-links{display:flex; align-items:center; gap:20px; font-size:14.5px; color:var(--cream-dim); white-space:nowrap;}
+  .nav-links a{position:relative; padding:4px 0;}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--orange);
+    transition:width .2s ease;
+  }
   .nav-links a:hover{color:var(--cream);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  .menu-btn{
+    display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--border);
+    background:transparent; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .menu-btn svg{color:var(--cream);}
   .btn{
     display:inline-flex; align-items:center; gap:8px;
     padding:12px 22px; border-radius:100px; font-weight:600; font-size:15px;
@@ -92,6 +172,15 @@
   .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(231,163,62,0.35);}
   .btn-ghost{ border-color:var(--border); color:var(--cream); }
   .btn-ghost:hover{ background:rgba(242,236,221,0.06); }
+
+  /* mobile dropdown menu */
+  .mobile-menu{
+    display:none; flex-direction:column; gap:2px; padding:10px 24px 18px;
+    border-top:1px solid var(--border); background:rgba(14,23,18,0.96);
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 4px; font-size:15px; border-bottom:1px solid var(--border); color:var(--cream-dim);}
+  .mobile-menu a:last-child{border-bottom:none;}
 
   section{position:relative; z-index:1;}
 
@@ -107,7 +196,9 @@
   .hero h1{font-size:52px; letter-spacing:-0.01em; margin-bottom:20px;}
   .hero h1 .accent{color:var(--orange);}
   .hero p.lead{font-size:18px; max-width:480px; margin-bottom:32px;}
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
+  .hero-note{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--cream-dim); margin-bottom:32px;}
+  .hero-note svg{color:var(--mint); flex:none;}
   .verticals-inline{display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:var(--cream-dim);}
   .verticals-inline span{
     padding:6px 12px; border:1px solid var(--border); border-radius:100px; background:rgba(255,255,255,0.03);
@@ -129,9 +220,16 @@
   .chat-avatar{width:36px; height:36px; border-radius:50%; background:var(--panel-2); display:flex; align-items:center; justify-content:center;}
   .chat-name{font-weight:600; font-size:14px;}
   .chat-status{font-size:12px; color:var(--mint);}
-  .bubble{max-width:82%; padding:11px 14px; border-radius:14px; font-size:14px; margin-bottom:10px; line-height:1.45;}
+  .chat-body{min-height:230px;}
+  .bubble{max-width:82%; padding:11px 14px; border-radius:14px; font-size:14px; margin-bottom:10px; line-height:1.45;
+    opacity:0; transform:translateY(6px); animation:pop .3s ease forwards;}
   .bubble.in{background:var(--panel-2); border-bottom-left-radius:4px;}
   .bubble.out{background:var(--orange); color:#1B1305; margin-left:auto; border-bottom-right-radius:4px; font-weight:500;}
+  @keyframes pop{ to{opacity:1; transform:translateY(0);} }
+  .chat-body .bubble:nth-child(1){animation-delay:.1s;}
+  .chat-body .bubble:nth-child(2){animation-delay:.6s;}
+  .chat-body .bubble:nth-child(3){animation-delay:1.05s;}
+  .chat-body .bubble:nth-child(4){animation-delay:1.55s;}
   .typing{display:inline-flex; gap:4px; padding:6px 2px;}
   .typing span{width:6px; height:6px; border-radius:50%; background:var(--cream-dim); animation:blink 1.2s infinite;}
   .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
@@ -148,7 +246,10 @@
   .eyebrow{display:block; color:var(--orange); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;}
   .section-head h2{font-size:36px; margin-bottom:14px;}
 
-  .how{padding:96px 0;}
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  .how{padding:96px 0 56px;}
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .step{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -160,6 +261,30 @@
   }
   .step h3{font-size:19px; margin-bottom:8px;}
   .step p{font-size:14.5px;}
+
+  .lifecycle{padding:56px 0 96px;}
+  .life-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .life-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:28px 24px; position:relative; overflow:hidden;
+  }
+  .life-card::after{
+    content:''; position:absolute; width:180px; height:180px; border-radius:50%;
+    filter:blur(60px); opacity:.16; top:-70px; right:-50px; pointer-events:none;
+  }
+  .life-card.c1::after{background:var(--mint);}
+  .life-card.c2::after{background:#FF8E7C;}
+  .life-card.c3::after{background:var(--blue);}
+  .life-icon{
+    width:40px; height:40px; border-radius:10px; margin-bottom:16px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2);
+  }
+  .life-card.c1 .life-icon{color:var(--mint);}
+  .life-card.c2 .life-icon{color:#FF8E7C;}
+  .life-card.c3 .life-icon{color:var(--blue);}
+  .life-card h3{font-size:19px; margin-bottom:8px; position:relative;}
+  .life-card p{font-size:14.5px; position:relative;}
 
   .benefits{padding:96px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .benefit-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
@@ -176,6 +301,35 @@
   }
   .benefit h3{font-size:16.5px; font-family:'Work Sans',sans-serif; font-weight:600; margin-bottom:6px; color:var(--cream);}
   .benefit p{font-size:14px;}
+
+  .integrations{padding:96px 0;}
+  .integ-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .integ-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:26px 22px;
+    display:flex; flex-direction:column; gap:10px; align-items:flex-start;
+  }
+  .integ-icon{
+    width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    background:var(--panel-2); font-size:22px;
+  }
+  .integ-card h3{font-size:16px; font-family:'Work Sans',sans-serif; font-weight:600; color:var(--cream);}
+  .integ-card p{font-size:14px;}
+
+  .faq{padding:96px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .faq-list{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+  .faq-item{
+    background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+  }
+  .faq-q{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:20px 22px; background:none; border:none; text-align:left; cursor:pointer;
+    font-family:'Work Sans',sans-serif; font-size:16px; font-weight:600; color:var(--cream);
+  }
+  .faq-q .chevron{flex:none; transition:transform .2s ease; color:var(--orange);}
+  .faq-item.open .faq-q .chevron{transform:rotate(180deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a p{padding:0 22px 20px; font-size:14.5px;}
+  .faq-item.open .faq-a{max-height:220px;}
 
   .cta-band{padding:80px 0;}
   .cta-card{
@@ -194,12 +348,26 @@
   footer{padding:40px 0; border-top:1px solid var(--border);}
   .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13.5px; color:var(--cream-dim);}
   .foot-brand{display:flex; align-items:center; gap:8px; font-family:'Fraunces',serif; font-weight:700; color:var(--cream);}
+  .foot-links{display:flex; gap:18px;}
+  .foot-links a:hover{color:var(--cream);}
 
+  .back-to-top{
+    position:fixed; right:22px; bottom:22px; width:44px; height:44px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    color:var(--cream); opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease; z-index:25;
+    box-shadow:var(--shadow);
+  }
+  .back-to-top.show{opacity:1; pointer-events:auto;}
+  .back-to-top:hover{transform:translateY(-3px);}
+
+  @media (max-width:1080px){
+    .nav-links{display:none;}
+    .menu-btn{display:flex;}
+  }
   @media (max-width:880px){
     .hero-grid{grid-template-columns:1fr;}
-    .nav-links{display:none;}
     .hero h1{font-size:38px;}
-    .steps, .benefit-grid{grid-template-columns:1fr;}
+    .steps, .benefit-grid, .integ-grid, .life-grid{grid-template-columns:1fr;}
     .section-head h2{font-size:28px;}
   }
 </style>
@@ -223,11 +391,27 @@
     </div>
     <nav class="nav-links">
       <a href="#como-funciona">Como funciona</a>
+      <a href="#pos-agendamento">Lembretes</a>
       <a href="#beneficios">Benefícios</a>
+      <a href="#integracoes">Integrações</a>
+      <a href="#faq">FAQ</a>
       <a href="#contato">Contato</a>
     </nav>
-    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    <div class="nav-right">
+      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
   </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#como-funciona">Como funciona</a>
+    <a href="#pos-agendamento">Lembretes e remarcação</a>
+    <a href="#beneficios">Benefícios</a>
+    <a href="#integracoes">Integrações</a>
+    <a href="#faq">Perguntas frequentes</a>
+    <a href="#contato">Contato</a>
+  </nav>
 </header>
 
 <section class="hero">
@@ -242,6 +426,10 @@
       <div class="hero-ctas">
         <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
         <a class="btn btn-ghost" href="#como-funciona">Ver como funciona</a>
+      </div>
+      <div class="hero-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sem instalar nada — funciona no WhatsApp que você já usa
       </div>
       <div class="verticals-inline">
         <span>Barbearias</span><span>Farmácias</span><span>Clínicas</span>
@@ -262,11 +450,12 @@
           <div class="chat-status">● Respondendo agora</div>
         </div>
       </div>
-      <div class="bubble out">Oi! Queria marcar um horário pra sexta à tarde</div>
-      <div class="bubble in">Perfeito! Sexta às 15h está livre — posso confirmar pra você?</div>
-      <div class="bubble out">Sim, pode confirmar</div>
-      <div class="bubble in">Agendado! Te espero sexta às 15h 🙂</div>
-      <div class="bubble in"><div class="typing"><span></span><span></span><span></span></div></div>
+      <div class="chat-body" id="chatBody">
+        <div class="bubble out">Oi! Queria marcar um horário pra sexta à tarde</div>
+        <div class="bubble in">Perfeito! Sexta às 15h está livre — posso confirmar pra você?</div>
+        <div class="bubble out">Sim, pode confirmar</div>
+        <div class="bubble in">Agendado! Te espero sexta às 15h 🙂</div>
+      </div>
     </div>
   </div>
 </section>
@@ -284,23 +473,23 @@
 
 <section class="how" id="como-funciona">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Como funciona</span>
       <h2>Três passos, zero esforço manual</h2>
       <p>O cliente nem percebe que está falando com uma automação — só sente que foi atendido na hora.</p>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">1</div>
         <h3>Cliente manda mensagem</h3>
         <p>Pelo WhatsApp do seu negócio, do jeito que ele já usa todo dia — sem baixar nada novo.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">2</div>
         <h3>A IA entende e verifica</h3>
         <p>Interpreta o que o cliente quer, confere a agenda em tempo real e propõe (ou ajusta) um horário.</p>
       </div>
-      <div class="step">
+      <div class="step reveal">
         <div class="step-num">3</div>
         <h3>Confirma e lembra sozinho</h3>
         <p>Agenda só depois do "sim" do cliente, e envia lembrete automático mais perto da data.</p>
@@ -309,50 +498,83 @@
   </div>
 </section>
 
+<section class="lifecycle" id="pos-agendamento">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Depois de agendado</span>
+      <h2>O cuidado continua até o dia do horário</h2>
+      <p>O AgendaZap não para depois do "agendado" — ele acompanha o cliente até a cadeira.</p>
+    </div>
+    <div class="life-grid">
+      <div class="life-card c1 reveal">
+        <div class="life-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Lembrete automático</h3>
+        <p>Antes do horário marcado, o cliente recebe uma mensagem lembrando — e pode responder ali mesmo pra confirmar.</p>
+      </div>
+      <div class="life-card c2 reveal">
+        <div class="life-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Cancelamento sem ligação</h3>
+        <p>Se não puder mais ir, o cliente avisa pelo próprio WhatsApp e o horário já libera na sua agenda na hora.</p>
+      </div>
+      <div class="life-card c3 reveal">
+        <div class="life-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16m0 5v-5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Remarcação em segundos</h3>
+        <p>Precisa mudar o dia ou horário? A IA confere a disponibilidade real e já reagenda, sem trocar mensagens indo e voltando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="benefits" id="beneficios">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="eyebrow">Benefícios</span>
       <h2>O que muda no seu negócio</h2>
       <p>Menos tempo perdido no telefone, menos falta de cliente, mais controle da agenda.</p>
     </div>
     <div class="benefit-grid">
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
         </div>
         <h3>Atendimento 24 horas</h3>
         <p>O cliente agenda a qualquer hora, mesmo depois do expediente — sem ninguém precisar responder.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5m5 14V9m5 10V4m5 15v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </div>
         <h3>Menos faltas na agenda</h3>
         <p>Lembretes automáticos antes do horário reduzem o famoso "esqueci que tinha marcado".</p>
       </div>
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 21a8 8 0 1 0-16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
         </div>
         <h3>Equipe livre pro que importa</h3>
         <p>Ninguém precisa parar o atendimento presencial pra responder WhatsApp ou telefone.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.8"/></svg>
         </div>
         <h3>Agenda sempre organizada</h3>
         <p>Cada agendamento, remarcação e cancelamento é registrado automaticamente — sem planilha manual.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 15l4-5 3 3 5-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Visão clara do negócio</h3>
         <p>Histórico de agendamentos e faturamento organizado, pronto pra acompanhar quando quiser.</p>
       </div>
-      <div class="benefit">
+      <div class="benefit reveal">
         <div class="benefit-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </div>
@@ -363,9 +585,68 @@
   </div>
 </section>
 
+<section class="integrations" id="integracoes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por trás da automação</span>
+      <h2>Conectado com o que você já usa</h2>
+      <p>Sem sistema novo pra aprender — o AgendaZap trabalha junto com suas ferramentas de sempre.</p>
+    </div>
+    <div class="integ-grid">
+      <div class="integ-card reveal">
+        <div class="integ-icon">💬</div>
+        <h3>WhatsApp</h3>
+        <p>Toda a conversa acontece no WhatsApp do seu negócio — o canal que seus clientes já usam.</p>
+      </div>
+      <div class="integ-card reveal">
+        <div class="integ-icon">📅</div>
+        <h3>Google Calendar</h3>
+        <p>Cada agendamento, remarcação e cancelamento atualiza sua agenda automaticamente, em tempo real.</p>
+      </div>
+      <div class="integ-card reveal">
+        <div class="integ-icon">📊</div>
+        <h3>Planilha organizada</h3>
+        <p>Histórico completo de clientes, serviços e status sempre atualizado, sem digitar nada manualmente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+      <p>Se não achar sua pergunta aqui, é só chamar no WhatsApp.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Preciso instalar algum aplicativo?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><p>Não. O AgendaZap funciona dentro do WhatsApp que o seu negócio já usa — não é preciso instalar nada, nem para você, nem para o cliente.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Funciona pra qualquer tipo de negócio?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><p>É configurado sob medida para o seu segmento — barbearias, clínicas, dentistas, academias, farmácias e restaurantes — com os serviços, preços e horários reais do seu estabelecimento.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>E se o cliente quiser cancelar ou remarcar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><p>A mesma conversa no WhatsApp resolve: o cliente pede a mudança, a IA confere a agenda e confirma — sem precisar ligar ou falar com alguém da equipe.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Como o AgendaZap evita que o cliente falte?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><p>Envia lembretes automáticos antes do horário marcado, e se o cliente responder pedindo para cancelar ou remarcar, a agenda já é atualizada na hora.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Minha agenda continua no Google Calendar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="faq-a"><p>Sim. O AgendaZap se integra ao Google Calendar e mantém uma planilha organizada com o histórico de todos os agendamentos, sem trabalho manual.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-band" id="contato">
   <div class="wrap">
-    <div class="cta-card">
+    <div class="cta-card reveal">
       <h2>Pronto pra sua agenda trabalhar sozinha?</h2>
       <p>Fala com a gente no WhatsApp e veja como fica o AgendaZap funcionando no seu negócio.</p>
       <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Falar no WhatsApp →</a>
@@ -382,10 +663,124 @@
       </svg>
       AgendaZap
     </div>
+    <nav class="foot-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#beneficios">Benefícios</a>
+      <a href="#faq">FAQ</a>
+    </nav>
     <span>© 2026 AgendaZap. Automação de agendamento via WhatsApp.</span>
     <a href="https://wa.me/5511925022244" target="_blank" rel="noopener">+55 11 92502-2244</a>
   </div>
 </footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+  // Rotating chat demo: agendamento -> remarcação -> cancelamento -> loop
+  const conversations = [
+    [
+      {who:'out', text:'Oi! Queria marcar um horário pra sexta à tarde'},
+      {who:'in', text:'Perfeito! Sexta às 15h está livre — posso confirmar pra você?'},
+      {who:'out', text:'Sim, pode confirmar'},
+      {who:'in', text:'Agendado! Te espero sexta às 15h 🙂'}
+    ],
+    [
+      {who:'in', text:'Oi! Passando pra lembrar do seu corte amanhã às 15h. Posso confirmar?'},
+      {who:'out', text:'Sim, confirmado!'},
+      {who:'in', text:'Show, te espero por aqui amanhã 👍'}
+    ],
+    [
+      {who:'out', text:'Preciso remarcar meu corte de amanhã, pode ser?'},
+      {who:'in', text:'Claro! Pra qual dia ou horário você quer mudar?'},
+      {who:'out', text:'Sexta às 14h'},
+      {who:'in', text:'Prontinho! Remarcado pra sexta às 14h ✅'}
+    ],
+    [
+      {who:'out', text:'Preciso cancelar meu horário de hoje, desculpa'},
+      {who:'in', text:'Sem problema, cancelado aqui! Quer já deixar outro dia marcado?'},
+      {who:'out', text:'Não, por enquanto não'},
+      {who:'in', text:'Combinado! Qualquer coisa é só chamar 👍'}
+    ]
+  ];
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  async function playConversation(list){
+    const chat = document.getElementById('chatBody');
+    if(!chat) return;
+    chat.innerHTML = '';
+    for(const msg of list){
+      if(msg.who === 'in'){
+        const typing = document.createElement('div');
+        typing.className = 'bubble in';
+        typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+        chat.appendChild(typing);
+        await wait(550);
+        typing.remove();
+        const b = document.createElement('div');
+        b.className = 'bubble in';
+        b.textContent = msg.text;
+        chat.appendChild(b);
+        await wait(450);
+      } else {
+        const b = document.createElement('div');
+        b.className = 'bubble out';
+        b.textContent = msg.text;
+        chat.appendChild(b);
+        await wait(600);
+      }
+    }
+  }
+  (async function loopConversations(){
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    await wait(3200); // let the initial static conversation finish first
+    let idx = 1;
+    while(true){
+      await playConversation(conversations[idx % conversations.length]);
+      await wait(3800);
+      idx++;
+    }
+  })();
+
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 600);
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
 
 </body>
 </html>

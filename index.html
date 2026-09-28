@@ -92,7 +92,7 @@
     --shadow: 0 20px 60px rgba(0,0,0,0.35);
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%;}
   body{
     margin:0;
     background:var(--bg);
@@ -100,6 +100,8 @@
     font-family:'Work Sans', system-ui, sans-serif;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    width:100%;
+    position:relative;
   }
   h1,h2,h3{
     font-family:'Fraunces', Georgia, serif;
@@ -471,9 +473,23 @@
   }
   .dash-features svg{color:var(--mint); flex:none; margin-top:2px;}
 
+  .period-tabs{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .period-tab{
+    padding:6px 12px; border-radius:100px; border:1px solid var(--border); background:rgba(255,255,255,0.03);
+    color:var(--cream-dim); font-size:12px; font-weight:600; cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, color .15s ease;
+    font-family:'Work Sans', sans-serif;
+  }
+  .period-tab:hover{color:var(--cream); border-color:rgba(231,163,62,0.4);}
+  .period-tab.active{background:var(--orange); border-color:var(--orange); color:#1B1305;}
+
   @media (max-width:880px){
     .dash-grid{grid-template-columns:1fr;}
     .dash-features{grid-template-columns:1fr;}
+  }
+  @media (max-width:420px){
+    .dash-stats{grid-template-columns:1fr; gap:8px;}
+    .period-tab{padding:5px 10px; font-size:11px;}
   }
 
   .faq{padding:96px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
@@ -562,6 +578,7 @@
     .section-head h2{font-size:28px;}
     .process-card{padding:32px 20px;}
     .process-steps{grid-template-columns:1fr; gap:24px;}
+    .neural-decor{inset:-4%; width:108%; height:108%;}
   }
 </style>
 </head>
@@ -936,51 +953,41 @@
           </div>
           <span class="dash-visual-badge">Ao vivo</span>
         </div>
+        <div class="period-tabs" id="periodTabs" role="tablist" aria-label="Período do painel">
+          <button class="period-tab" data-period="dia" type="button">Dia</button>
+          <button class="period-tab" data-period="semana" type="button">Semana</button>
+          <button class="period-tab active" data-period="mes" type="button">Mês</button>
+          <button class="period-tab" data-period="trimestre" type="button">Trimestre</button>
+          <button class="period-tab" data-period="semestre" type="button">Semestre</button>
+          <button class="period-tab" data-period="ano" type="button">Ano</button>
+        </div>
         <div class="dash-stats">
           <div class="stat-tile">
-            <span class="stat-label">Agendamentos hoje</span>
-            <span class="stat-value">14</span>
-            <span class="stat-trend up">↑ 18%</span>
+            <span class="stat-label" id="statLabel1">Agendamentos no mês</span>
+            <span class="stat-value" id="statValue1">214</span>
+            <span class="stat-trend up" id="statTrend1">↑ 18%</span>
           </div>
           <div class="stat-tile">
-            <span class="stat-label">Faturamento do mês</span>
-            <span class="stat-value">R$ 8.240</span>
-            <span class="stat-trend up">↑ 9%</span>
+            <span class="stat-label" id="statLabel2">Faturamento do mês</span>
+            <span class="stat-value" id="statValue2">R$ 8.240</span>
+            <span class="stat-trend up" id="statTrend2">↑ 9%</span>
           </div>
           <div class="stat-tile">
-            <span class="stat-label">Comparecimento</span>
-            <span class="stat-value">96%</span>
-            <span class="stat-trend up">↑ 4%</span>
+            <span class="stat-label" id="statLabel3">Comparecimento</span>
+            <span class="stat-value" id="statValue3">96%</span>
+            <span class="stat-trend up" id="statTrend3">↑ 4%</span>
           </div>
         </div>
-        <div class="dash-chart-label">Agendamentos por dia da semana</div>
-        <svg class="dash-svg" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="15" y="42.7" width="26" height="37.3" rx="3" fill="var(--mint)" opacity="0.85"/>
-          <rect x="55" y="33.3" width="26" height="46.7" rx="3" fill="var(--mint)" opacity="0.85"/>
-          <rect x="95" y="47.3" width="26" height="32.7" rx="3" fill="var(--mint)" opacity="0.85"/>
-          <rect x="135" y="24" width="26" height="56" rx="3" fill="var(--mint)" opacity="0.85"/>
-          <rect x="175" y="10" width="26" height="70" rx="3" fill="var(--orange)"/>
-          <rect x="215" y="38" width="26" height="42" rx="3" fill="var(--mint)" opacity="0.85"/>
-          <rect x="255" y="61.3" width="26" height="18.7" rx="3" fill="var(--mint)" opacity="0.5"/>
-          <line x1="10" y1="80" x2="290" y2="80" stroke="var(--border)" stroke-width="1"/>
-        </svg>
-        <div class="dash-chart-label">Faturamento — últimos 6 meses</div>
-        <svg class="dash-svg" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <div class="dash-chart-label" id="barChartLabel">Agendamentos por semana</div>
+        <svg class="dash-svg" id="barChart" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div class="dash-chart-label" id="lineChartLabel">Faturamento — últimas 4 semanas</div>
+        <svg class="dash-svg" id="lineChart" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="var(--orange)" stop-opacity="0.35"/>
               <stop offset="100%" stop-color="var(--orange)" stop-opacity="0"/>
             </linearGradient>
           </defs>
-          <line x1="10" y1="80" x2="290" y2="80" stroke="var(--border)" stroke-width="1"/>
-          <path d="M20,80 L74,64.4 L128,48.8 L182,52.3 L236,26.3 L290,10 L290,80 L20,80 Z" fill="url(#revFill)"/>
-          <path d="M20,80 L74,64.4 L128,48.8 L182,52.3 L236,26.3 L290,10" fill="none" stroke="var(--orange)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="20" cy="80" r="3" fill="var(--orange)"/>
-          <circle cx="74" cy="64.4" r="3" fill="var(--orange)"/>
-          <circle cx="128" cy="48.8" r="3" fill="var(--orange)"/>
-          <circle cx="182" cy="52.3" r="3" fill="var(--orange)"/>
-          <circle cx="236" cy="26.3" r="3" fill="var(--orange)"/>
-          <circle cx="290" cy="10" r="3.5" fill="var(--orange)" stroke="var(--bg)" stroke-width="1.5"/>
         </svg>
       </div>
     </div>
@@ -1179,6 +1186,171 @@
       idx++;
     }
   })();
+
+  // Dashboard preview: period tabs with mock data (real thing comes tomorrow, ligado ao Google Sheets)
+  const PERIODS = {
+    dia: {
+      stats: [
+        {label:'Agendamentos hoje', value:'14', trend:18},
+        {label:'Faturamento do dia', value:'R$ 890', trend:12},
+        {label:'Comparecimento', value:'96%', trend:4}
+      ],
+      barLabel:'Agendamentos por horário',
+      barCategories:['8h','10h','12h','14h','16h','18h','20h'],
+      barValues:[2,3,1,4,2,1,1],
+      lineLabel:'Faturamento acumulado no dia',
+      lineCategories:['8h','10h','12h','14h','16h','18h'],
+      lineValues:[90,240,310,520,690,890]
+    },
+    semana: {
+      stats: [
+        {label:'Agendamentos na semana', value:'58', trend:11},
+        {label:'Faturamento da semana', value:'R$ 4.180', trend:7},
+        {label:'Comparecimento', value:'94%', trend:2}
+      ],
+      barLabel:'Agendamentos por dia da semana',
+      barCategories:['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+      barValues:[6,8,5,9,12,7,3],
+      lineLabel:'Faturamento — últimos 7 dias',
+      lineCategories:['Seg','Ter','Qua','Qui','Sex','Sáb'],
+      lineValues:[480,610,540,700,900,950]
+    },
+    mes: {
+      stats: [
+        {label:'Agendamentos no mês', value:'214', trend:18},
+        {label:'Faturamento do mês', value:'R$ 8.240', trend:9},
+        {label:'Comparecimento', value:'96%', trend:4}
+      ],
+      barLabel:'Agendamentos por semana',
+      barCategories:['Sem 1','Sem 2','Sem 3','Sem 4'],
+      barValues:[48,52,58,56],
+      lineLabel:'Faturamento — últimas 4 semanas',
+      lineCategories:['Sem 1','Sem 2','Sem 3','Sem 4'],
+      lineValues:[1800,2050,2200,2190]
+    },
+    trimestre: {
+      stats: [
+        {label:'Agendamentos no trimestre', value:'612', trend:15},
+        {label:'Faturamento do trimestre', value:'R$ 23.640', trend:11},
+        {label:'Comparecimento', value:'95%', trend:3}
+      ],
+      barLabel:'Agendamentos por mês',
+      barCategories:['Jul','Ago','Set'],
+      barValues:[190,208,214],
+      lineLabel:'Faturamento — últimos 3 meses',
+      lineCategories:['Jul','Ago','Set'],
+      lineValues:[7200,7960,8480]
+    },
+    semestre: {
+      stats: [
+        {label:'Agendamentos no semestre', value:'1.180', trend:21},
+        {label:'Faturamento do semestre', value:'R$ 44.900', trend:14},
+        {label:'Comparecimento', value:'94%', trend:5}
+      ],
+      barLabel:'Agendamentos por mês',
+      barCategories:['Abr','Mai','Jun','Jul','Ago','Set'],
+      barValues:[172,180,196,190,208,214],
+      lineLabel:'Faturamento — últimos 6 meses',
+      lineCategories:['Abr','Mai','Jun','Jul','Ago','Set'],
+      lineValues:[6200,6800,7400,7900,8150,8450]
+    },
+    ano: {
+      stats: [
+        {label:'Agendamentos no ano', value:'2.340', trend:26},
+        {label:'Faturamento no ano', value:'R$ 89.400', trend:19},
+        {label:'Comparecimento', value:'95%', trend:6}
+      ],
+      barLabel:'Agendamentos por trimestre',
+      barCategories:['T1','T2','T3','T4*'],
+      barValues:[520,560,612,648],
+      lineLabel:'Faturamento — últimos 12 meses',
+      lineCategories:['Out/25','Dez/25','Fev/26','Abr/26','Jun/26','Ago/26'],
+      lineValues:[5200,5900,6400,7100,7800,8480]
+    }
+  };
+
+  function formatK(v){
+    if(v >= 1000){
+      const k = Math.round((v/1000)*10)/10;
+      return (Number.isInteger(k) ? k.toFixed(0) : k.toFixed(1).replace('.', ',')) + 'k';
+    }
+    return String(Math.round(v));
+  }
+
+  function renderBarChart(id, categories, values){
+    const svg = document.getElementById(id);
+    if(!svg) return;
+    const W = 300, padX = 14, baseline = 78, topPad = 14, maxH = baseline - topPad;
+    const n = values.length;
+    const gap = 10;
+    const innerW = W - padX*2;
+    const barW = (innerW - gap*(n-1)) / n;
+    const maxVal = Math.max(...values) * 1.2 || 1;
+    const peak = Math.max(...values);
+    let html = `<line x1="${padX-4}" y1="${baseline}" x2="${W-padX+4}" y2="${baseline}" stroke="var(--border)" stroke-width="1"/>`;
+    values.forEach((v, i) => {
+      const h = Math.max((v/maxVal)*maxH, 2);
+      const x = padX + i*(barW+gap);
+      const y = baseline - h;
+      const isPeak = v === peak;
+      html += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${isPeak ? 'var(--orange)' : 'var(--mint)'}" opacity="${isPeak ? '1' : '0.85'}"/>`;
+      html += `<text x="${(x+barW/2).toFixed(1)}" y="${(y-5).toFixed(1)}" font-size="9" text-anchor="middle" fill="var(--cream)" font-family="'Work Sans',sans-serif" font-weight="600">${v}</text>`;
+      html += `<text x="${(x+barW/2).toFixed(1)}" y="${(baseline+11).toFixed(1)}" font-size="7.5" text-anchor="middle" fill="var(--cream-dim)" font-family="'Work Sans',sans-serif">${categories[i]}</text>`;
+    });
+    svg.innerHTML = html;
+  }
+
+  function renderLineChart(id, categories, values){
+    const svg = document.getElementById(id);
+    if(!svg) return;
+    const W = 300, padX = 20, baseline = 78, topPad = 16, maxH = baseline - topPad;
+    const n = values.length;
+    const innerW = W - padX*2;
+    const stepX = n > 1 ? innerW/(n-1) : 0;
+    const maxVal = Math.max(...values) * 1.15 || 1;
+    const pts = values.map((v, i) => ({
+      x: padX + i*stepX,
+      y: baseline - (v/maxVal)*maxH,
+      v
+    }));
+    const lineD = 'M' + pts.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' L');
+    const areaD = lineD + ` L${pts[pts.length-1].x.toFixed(1)},${baseline} L${pts[0].x.toFixed(1)},${baseline} Z`;
+    let html = `<line x1="${padX-6}" y1="${baseline}" x2="${W-padX+6}" y2="${baseline}" stroke="var(--border)" stroke-width="1"/>`;
+    html += `<path d="${areaD}" fill="url(#revFill)"/>`;
+    html += `<path d="${lineD}" fill="none" stroke="var(--orange)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    pts.forEach((p, i) => {
+      const isLast = i === pts.length - 1;
+      html += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${isLast ? 3.5 : 3}" fill="var(--orange)" ${isLast ? 'stroke="var(--bg)" stroke-width="1.5"' : ''}/>`;
+      html += `<text x="${p.x.toFixed(1)}" y="${(p.y-8).toFixed(1)}" font-size="8.5" text-anchor="middle" fill="var(--cream)" font-family="'Work Sans',sans-serif" font-weight="600">${formatK(p.v)}</text>`;
+      html += `<text x="${p.x.toFixed(1)}" y="${(baseline+11).toFixed(1)}" font-size="7.5" text-anchor="middle" fill="var(--cream-dim)" font-family="'Work Sans',sans-serif">${categories[i]}</text>`;
+    });
+    svg.querySelectorAll(':scope > *:not(defs)').forEach(el => el.remove());
+    svg.insertAdjacentHTML('beforeend', html);
+  }
+
+  function switchPeriod(key){
+    const d = PERIODS[key];
+    if(!d) return;
+    d.stats.forEach((s, i) => {
+      const n = i + 1;
+      document.getElementById('statLabel'+n).textContent = s.label;
+      document.getElementById('statValue'+n).textContent = s.value;
+      document.getElementById('statTrend'+n).textContent = '↑ ' + s.trend + '%';
+    });
+    document.getElementById('barChartLabel').textContent = d.barLabel;
+    renderBarChart('barChart', d.barCategories, d.barValues);
+    document.getElementById('lineChartLabel').textContent = d.lineLabel;
+    renderLineChart('lineChart', d.lineCategories, d.lineValues);
+    document.querySelectorAll('.period-tab').forEach(btn => btn.classList.toggle('active', btn.dataset.period === key));
+  }
+
+  const periodTabs = document.getElementById('periodTabs');
+  if(periodTabs){
+    periodTabs.querySelectorAll('.period-tab').forEach(btn => {
+      btn.addEventListener('click', () => switchPeriod(btn.dataset.period));
+    });
+    switchPeriod('mes');
+  }
 
   // Mobile menu toggle
   const menuBtn = document.getElementById('menuBtn');

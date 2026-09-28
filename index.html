@@ -383,6 +383,43 @@
   .faq-a p{padding:0 22px 20px; font-size:14.5px;}
   .faq-item.open .faq-a{max-height:220px;}
 
+  .offer{padding:96px 0 16px;}
+  .offer-card{
+    max-width:960px; margin:0 auto; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    background:linear-gradient(135deg, var(--panel-2), var(--panel));
+    border:1px solid rgba(231,163,62,0.35); border-radius:24px; padding:44px 40px;
+    position:relative; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .offer-card::after{
+    content:''; position:absolute; width:320px; height:320px; border-radius:50%;
+    background:var(--mint); opacity:.10; filter:blur(70px); bottom:-140px; left:-100px; pointer-events:none;
+  }
+  .offer-card > *{position:relative; z-index:1;}
+  .offer-card h2{font-size:32px; margin-bottom:10px;}
+  .offer-card h2 .price{color:var(--orange); white-space:nowrap;}
+  .offer-sub{margin-bottom:22px;}
+  .offer-list{list-style:none; margin:0 0 26px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .offer-list li{display:flex; gap:10px; align-items:flex-start; font-size:15px; color:var(--cream); line-height:1.5;}
+  .offer-list svg{color:var(--mint); flex:none; margin-top:3px;}
+  .offer-after{
+    padding:18px 20px; border-radius:14px; border:1px solid var(--border); background:rgba(255,255,255,0.03);
+  }
+  .offer-after p{font-size:14.5px; color:var(--cream); margin-bottom:14px;}
+  .pix-box{
+    background:var(--bg-soft); border:1px solid var(--border); border-radius:18px; padding:22px;
+    display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
+  }
+  .pix-label{font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--orange);}
+  .pix-qr{width:100%; max-width:220px; aspect-ratio:1; object-fit:contain; background:#fff; border-radius:12px; padding:8px; display:block;}
+  .pix-code-label{font-size:13px; color:var(--cream-dim); align-self:flex-start;}
+  .pix-code{
+    width:100%; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:11.5px; line-height:1.5;
+    color:var(--cream); background:var(--bg); border:1px solid var(--border); border-radius:10px;
+    padding:10px 12px; word-break:break-all; text-align:left; max-height:92px; overflow:auto; user-select:all;
+  }
+  .pix-copy{width:100%; justify-content:center; background:rgba(242,236,221,0.04); font-family:inherit;}
+  .pix-copy.copied{background:var(--mint); box-shadow:0 8px 24px rgba(110,231,183,0.25);}
+
   .cta-band{padding:80px 0;}
   .cta-card{
     background:linear-gradient(135deg, var(--panel-2), var(--panel));
@@ -427,6 +464,13 @@
     .hero h1{font-size:38px;}
     .steps, .benefit-grid, .integ-grid, .life-grid{grid-template-columns:1fr;}
     .section-head h2{font-size:28px;}
+    .offer-card{grid-template-columns:1fr; padding:32px 20px; gap:28px;}
+    .offer-card h2{font-size:26px;}
+    /* no mobile: detalhes -> QR PIX -> "após o pagamento" */
+    .offer-card{display:flex; flex-direction:column; align-items:stretch; gap:0;}
+    .offer-info{display:contents;}
+    .pix-box{order:1; margin-bottom:24px;}
+    .offer-after{order:2;}
   }
 </style>
 </head>
@@ -453,6 +497,7 @@
       <a href="#beneficios">Benefícios</a>
       <a href="#integracoes">Integrações</a>
       <a href="#faq">FAQ</a>
+      <a href="#contratar">Contratar</a>
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-right">
@@ -470,6 +515,7 @@
     <a href="#beneficios">Benefícios</a>
     <a href="#integracoes">Integrações</a>
     <a href="#faq">Perguntas frequentes</a>
+    <a href="#contratar">Contratar o setup</a>
     <a href="#contato">Contato</a>
   </nav>
 </header>
@@ -720,6 +766,38 @@
   </div>
 </section>
 
+<section class="offer" id="contratar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Comece agora</span>
+      <h2>Contrate o setup</h2>
+      <p>Pagamento via PIX, sem cadastro nem checkout. Depois é só me chamar no WhatsApp.</p>
+    </div>
+    <div class="offer-card reveal">
+      <div class="offer-info">
+        <h2>Setup Assistido — <span class="price">R$500,00</span></h2>
+        <p class="offer-sub">Eu configuro tudo pra você, do zero até a primeira mensagem funcionando.</p>
+        <ul class="offer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Configuração completa da automação de agendamento via WhatsApp + IA</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Conectado ao seu Google Calendar e Google Sheets</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Testado antes da entrega</li>
+        </ul>
+        <div class="offer-after">
+          <p>Após o pagamento, me chama no WhatsApp pra agendarmos o setup.</p>
+          <a class="btn btn-primary" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Já paguei — chamar no WhatsApp →</a>
+        </div>
+      </div>
+      <div class="pix-box">
+        <span class="pix-label">Pague com PIX</span>
+        <img class="pix-qr" src="assets/pix-qrcode.png" alt="QR Code PIX para pagamento de R$500,00" width="220" height="220" loading="lazy">
+        <span class="pix-code-label">Ou use o PIX Copia e Cola:</span>
+        <div class="pix-code" id="pixCode">00020126470014BR.GOV.BCB.PIX0111235473548030210Agenda Zap5204000053039865406500.005802BR5925JOSE ANTONIO ZAVALETA LOP6009SAO PAULO622605225Zcw5KzuGoBPV02KpPBHPp63042188</div>
+        <button class="btn btn-ghost pix-copy" id="pixCopy" type="button">Copiar código PIX</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-band" id="contato">
   <div class="wrap">
     <div class="cta-card reveal">
@@ -852,6 +930,25 @@
       document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
       if(!isOpen) item.classList.add('open');
     });
+  });
+
+  // PIX copia e cola
+  const pixCopy = document.getElementById('pixCopy');
+  pixCopy.addEventListener('click', async () => {
+    const code = document.getElementById('pixCode').textContent.trim();
+    let ok = false;
+    try { await navigator.clipboard.writeText(code); ok = true; }
+    catch(e){
+      // fallback para contextos sem Clipboard API (ex.: http sem TLS)
+      const ta = document.createElement('textarea');
+      ta.value = code; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { ok = document.execCommand('copy'); } catch(_){}
+      ta.remove();
+    }
+    pixCopy.textContent = ok ? 'Copiado! ✓' : 'Selecione e copie manualmente';
+    pixCopy.classList.toggle('copied', ok);
+    setTimeout(() => { pixCopy.textContent = 'Copiar código PIX'; pixCopy.classList.remove('copied'); }, 2500);
   });
 
   // Scroll reveal

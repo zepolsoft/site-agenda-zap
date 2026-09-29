@@ -357,7 +357,7 @@
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
 
-  .how{padding:88px 0;}
+  .how{padding:72px 0;}
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .step{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -370,7 +370,7 @@
   .step h3{font-size:19px; margin-bottom:8px;}
   .step p{font-size:14.5px;}
 
-  .lifecycle{padding:88px 0;}
+  .lifecycle{padding:72px 0;}
   .life-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .life-card{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -394,7 +394,7 @@
   .life-card h3{font-size:19px; margin-bottom:8px; position:relative;}
   .life-card p{font-size:14.5px; position:relative;}
 
-  .benefits{padding:88px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .benefits{padding:72px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .benefit-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
   .benefit{
     background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:24px;
@@ -410,7 +410,7 @@
   .benefit h3{font-size:16.5px; font-family:'Work Sans',sans-serif; font-weight:600; margin-bottom:6px; color:var(--cream);}
   .benefit p{font-size:14px;}
 
-  .integrations{padding:88px 0;}
+  .integrations{padding:72px 0;}
   .integ-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
   .integ-card{
     background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:26px 22px;
@@ -424,7 +424,7 @@
   .integ-card p{font-size:14px;}
 
   /* Dashboard preview section */
-  .dash-preview{padding:88px 0;}
+  .dash-preview{padding:72px 0;}
   .dash-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:36px;}
   .dash-visual{
     background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -493,7 +493,7 @@
     .period-tab{padding:5px 10px; font-size:11px;}
   }
 
-  .faq{padding:88px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .faq{padding:72px 0; background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .faq-list{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
   .faq-item{
     background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden;
@@ -509,7 +509,7 @@
   .faq-a p{padding:0 22px 20px; font-size:14.5px;}
   .faq-item.open .faq-a{max-height:220px;}
 
-  .offer{padding:88px 0;}
+  .offer{padding:72px 0;}
   .process-card{
     max-width:920px; margin:0 auto;
     background:linear-gradient(135deg, var(--panel-2), var(--panel));
@@ -533,7 +533,7 @@
   }
   .process-cta p{max-width:520px; margin:0 auto 20px; color:var(--cream-dim);}
 
-  .cta-band{padding:88px 0;}
+  .cta-band{padding:72px 0;}
   .cta-card{
     background:linear-gradient(135deg, var(--panel-2), var(--panel));
     border:1px solid var(--border); border-radius:24px; padding:56px 40px; text-align:center;
@@ -576,10 +576,12 @@
     .hero-grid{grid-template-columns:1fr;}
     .hero h1{font-size:38px;}
     .steps, .benefit-grid, .integ-grid, .life-grid{grid-template-columns:1fr;}
+    .section-head{margin-bottom:36px;}
     .section-head h2{font-size:28px;}
     .process-card{padding:32px 20px;}
     .process-steps{grid-template-columns:1fr; gap:24px;}
     .neural-decor{inset:-4%; width:108%; height:108%;}
+    .how, .lifecycle, .benefits, .integrations, .dash-preview, .offer, .faq, .cta-band{padding:52px 0;}
   }
 </style>
 </head>

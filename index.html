@@ -353,7 +353,6 @@
 
   .logos{padding:34px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .logos-row{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
-  .logo-pill.dup{display:none;}
   .mobile-cta{display:none;}
   .logo-pill{
     display:flex; align-items:center; gap:8px; padding:9px 16px; border-radius:100px;
@@ -628,22 +627,15 @@
     .hero-pills span{font-size:12px; padding:5px 10px;}
 
     /* smaller phone mockup */
-    .iphone-frame{width:248px; border-radius:46px; padding:10px;}
-    .iphone-frame::after{border-radius:46px;}
-    .phone{border-radius:36px;}
-    .chat-body{height:340px; display:flex; flex-direction:column; justify-content:flex-end;}
-    .chat-body .bubble{flex:none;}
-    .chat-body .bubble.in{align-self:flex-start;}
-    .chat-body .bubble.out{align-self:flex-end;}
+    .iphone-frame{width:min(288px, 100%);}
+    .chat-body{height:420px; padding:14px 12px 8px;}
+    .bubble{max-width:84%;}
     .neural-decor{display:none;}
 
-    /* segment strip: auto-scrolling marquee */
-    .logos{padding:26px 0; overflow:hidden;}
-    .logos-row{flex-wrap:nowrap; justify-content:flex-start; gap:10px; width:max-content; padding:0; max-width:none;
-      animation:marquee 28s linear infinite;}
-    .logo-pill.dup{display:flex;}
-    .logo-pill{white-space:nowrap; font-size:13.5px; padding:8px 14px;}
-    .logos{-webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+    /* segment strip: static, compact */
+    .logos{padding:26px 0;}
+    .logos-row{gap:8px;}
+    .logo-pill{white-space:nowrap; font-size:13px; padding:7px 12px; gap:6px;}
 
     /* tighter sections */
     .how, .lifecycle, .benefits, .integrations, .dash-preview, .offer, .faq, .cta-band{padding:44px 0;}
@@ -682,8 +674,10 @@
     .cta-buttons{flex-direction:column; gap:10px;}
     .cta-buttons .btn{width:100%;}
 
-    footer{padding:28px 0 96px;}
-    .foot-row{flex-direction:column; align-items:flex-start; gap:12px;}
+    footer{padding:32px 0 36px; background:var(--bg); position:relative; z-index:1;}
+    .foot-row{flex-direction:column; align-items:center; text-align:center; gap:14px;}
+    .foot-links{gap:22px; justify-content:center; flex-wrap:wrap;}
+    .foot-row > span{font-size:12.5px; max-width:260px; line-height:1.5;}
 
     /* sticky bottom CTA */
     .mobile-cta{
@@ -696,11 +690,6 @@
     .mobile-cta .btn-primary{flex:1; padding:13px 16px;}
     .mobile-cta .btn-ghost{padding:13px 16px;}
     .back-to-top{display:none;}
-  }
-  @keyframes marquee{ to{ transform:translateX(calc(-50% - 5px)); } }
-  @media (prefers-reduced-motion: reduce){
-    .logos-row{animation:none !important; flex-wrap:wrap !important; justify-content:center !important; width:auto !important;}
-    .logo-pill.dup{display:none !important;}
   }
 </style>
 </head>
@@ -877,12 +866,6 @@
     <div class="logo-pill">🦷 Dentistas</div>
     <div class="logo-pill">🩺 Consultórios</div>
     <div class="logo-pill">🐾 Pet Shops</div>
-    <div class="logo-pill dup" aria-hidden="true">💈 Barbearias</div>
-    <div class="logo-pill dup" aria-hidden="true">💇 Salões de Beleza</div>
-    <div class="logo-pill dup" aria-hidden="true">✨ Clínicas de Estética</div>
-    <div class="logo-pill dup" aria-hidden="true">🦷 Dentistas</div>
-    <div class="logo-pill dup" aria-hidden="true">🩺 Consultórios</div>
-    <div class="logo-pill dup" aria-hidden="true">🐾 Pet Shops</div>
   </div>
 </section>
 

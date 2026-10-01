@@ -691,6 +691,79 @@
     .mobile-cta .btn-ghost{padding:13px 16px;}
     .back-to-top{display:none;}
   }
+
+  /* ===== Desktop refinements (mobile untouched) ===== */
+  .nav-links .nav-extra{display:none;}
+  @media (min-width:881px){
+    .how, .lifecycle, .benefits, .integrations, .dash-preview, .offer, .faq, .cta-band{padding:96px 0;}
+    .section-head{margin-bottom:56px;}
+    .section-head h2{font-size:40px;}
+    .js .reveal{transform:translateY(10px);}
+
+    /* Como funciona: a real sequence, drawn as a connected timeline */
+    .steps{gap:48px; max-width:1000px; margin:0 auto;}
+    .step{background:none; border:none; border-radius:0; padding:0;}
+    .step-num{
+      width:44px; height:44px; border-radius:50%; font-size:18px; margin-bottom:22px;
+      background:var(--bg); border:1.5px solid var(--orange); position:relative; z-index:1;
+    }
+    .step:not(:last-child)::after{
+      content:''; position:absolute; top:22px; left:56px; right:-36px; height:1.5px;
+      background:linear-gradient(90deg, rgba(231,163,62,0.7), rgba(231,163,62,0.12));
+    }
+    .step h3{font-size:22px; margin-bottom:10px;}
+    .step p{font-size:15.5px; max-width:300px;}
+
+    /* Depois de agendado: heading on the left, the three moments stacked on the right */
+    .lifecycle .wrap{display:grid; grid-template-columns:0.85fr 1.15fr; gap:72px; align-items:start;}
+    .lifecycle .section-head{text-align:left; margin:0; max-width:420px; position:sticky; top:120px;}
+    .life-grid{grid-template-columns:1fr; gap:14px;}
+    .life-card{display:grid; grid-template-columns:44px 1fr; column-gap:20px; row-gap:6px; padding:26px 28px;}
+    .life-icon{grid-row:span 2; margin:0; width:44px; height:44px;}
+    .life-card h3{margin:0; align-self:center; font-size:20px;}
+    .life-card p{font-size:15px;}
+
+    /* Benefícios: open grid with hairlines instead of six boxed cards */
+    .benefit-grid{column-gap:56px; row-gap:44px;}
+    .benefit{background:none; border:none; border-radius:0; border-top:1px solid var(--border); padding:28px 0 0;}
+    .benefit:hover{transform:none; border-top-color:var(--orange);}
+    .benefit h3{font-size:18px; margin-bottom:8px;}
+    .benefit p{font-size:15px;}
+
+    /* Integrações: one panel split in three, not three more cards */
+    .integ-grid{gap:0; background:var(--panel); border:1px solid var(--border); border-radius:20px; overflow:hidden;}
+    .integ-card{background:none; border:none; border-radius:0; padding:34px 32px;}
+    .integ-card + .integ-card{border-left:1px solid var(--border);}
+
+    /* Dashboard: feature list as a quiet line under the visuals */
+    .dash-features{display:grid; grid-template-columns:repeat(3, minmax(0, 300px)); justify-content:center; gap:28px; max-width:none;}
+    .dash-features li{background:none; border:none; padding:0; font-size:14.5px; color:var(--cream-dim);}
+
+    /* Como contratar */
+    .process-num{background:rgba(231,163,62,0.14); border:1px solid rgba(231,163,62,0.35);}
+    .process-card{padding:52px 56px;}
+    .process-step h3{font-size:19px;}
+
+    /* FAQ */
+    .faq-q{padding:22px 26px; font-size:16.5px;}
+    .faq-item{transition:border-color .15s ease;}
+    .faq-item:hover, .faq-item.open{border-color:rgba(231,163,62,0.35);}
+
+    /* Final CTA */
+    .cta-card{padding:72px 48px;}
+    .cta-card h2{font-size:40px;}
+    .cta-card p{font-size:17px; max-width:520px;}
+
+    /* Footer */
+    footer{padding:48px 0;}
+    .foot-brand{font-size:19px; gap:10px;}
+    .foot-brand svg{width:26px; height:26px;}
+    .foot-links{gap:26px; font-size:14.5px;}
+  }
+  @media (min-width:1280px){
+    .hero{padding:104px 0 84px;}
+    .hero h1{font-size:58px;}
+  }
 </style>
 </head>
 <body>
@@ -712,13 +785,13 @@
     </div>
     <nav class="nav-links">
       <a href="#como-funciona">Como funciona</a>
-      <a href="#pos-agendamento">Lembretes</a>
+      <a class="nav-extra" href="#pos-agendamento">Lembretes</a>
       <a href="#beneficios">Benefícios</a>
-      <a href="#integracoes">Integrações</a>
+      <a class="nav-extra" href="#integracoes">Integrações</a>
       <a href="#dashboard">Dashboard</a>
-      <a href="#contratar">Contratar</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contato">Contato</a>
+      <a href="#contratar">Como contratar</a>
+      <a href="#faq">Dúvidas</a>
+      <a class="nav-extra" href="#contato">Contato</a>
     </nav>
     <div class="nav-right">
       <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração</a>

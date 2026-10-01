@@ -353,6 +353,8 @@
 
   .logos{padding:34px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .logos-row{display:flex; flex-wrap:wrap; justify-content:center; gap:14px;}
+  .logo-pill.dup{display:none;}
+  .mobile-cta{display:none;}
   .logo-pill{
     display:flex; align-items:center; gap:8px; padding:9px 16px; border-radius:100px;
     border:1px solid var(--border); background:rgba(255,255,255,0.03); font-size:14px; color:var(--cream-dim);
@@ -606,6 +608,100 @@
     .neural-decor{inset:-4%; width:108%; height:108%;}
     .how, .lifecycle, .benefits, .integrations, .dash-preview, .offer, .faq, .cta-band{padding:52px 0;}
   }
+
+  /* ===== Mobile polish ===== */
+  h1, h2, h3{text-wrap:balance;}
+  .btn{white-space:nowrap; justify-content:center;}
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    .hero{padding:40px 0 36px;}
+    .hero-grid{gap:36px;}
+    .badge{font-size:12px; padding:6px 12px; margin-bottom:18px;}
+    .hero h1{font-size:34px; margin-bottom:16px;}
+    .hero p.lead{font-size:16px; margin-bottom:22px;}
+    .hero-checks{gap:10px; margin-bottom:26px;}
+    .hero-checks li{font-size:15px;}
+    .hero-checks li.lead-check{font-size:16px;}
+    .hero-ctas{flex-direction:column; gap:10px;}
+    .hero-ctas .btn{width:100%; padding:15px 22px; font-size:16px;}
+    .hero-pills{gap:6px;}
+    .hero-pills span{font-size:12px; padding:5px 10px;}
+
+    /* smaller phone mockup */
+    .iphone-frame{width:248px; border-radius:46px; padding:10px;}
+    .iphone-frame::after{border-radius:46px;}
+    .phone{border-radius:36px;}
+    .chat-body{height:340px; display:flex; flex-direction:column; justify-content:flex-end;}
+    .chat-body .bubble{flex:none;}
+    .chat-body .bubble.in{align-self:flex-start;}
+    .chat-body .bubble.out{align-self:flex-end;}
+    .neural-decor{display:none;}
+
+    /* segment strip: auto-scrolling marquee */
+    .logos{padding:26px 0; overflow:hidden;}
+    .logos-row{flex-wrap:nowrap; justify-content:flex-start; gap:10px; width:max-content; padding:0; max-width:none;
+      animation:marquee 28s linear infinite;}
+    .logo-pill.dup{display:flex;}
+    .logo-pill{white-space:nowrap; font-size:13.5px; padding:8px 14px;}
+    .logos{-webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
+
+    /* tighter sections */
+    .how, .lifecycle, .benefits, .integrations, .dash-preview, .offer, .faq, .cta-band{padding:44px 0;}
+    .section-head{margin-bottom:26px;}
+    .section-head h2{font-size:26px;}
+    .section-head p{font-size:15px;}
+
+    /* cards become compact rows: icon/number on the left, text on the right */
+    .steps, .life-grid, .benefit-grid, .integ-grid{gap:10px;}
+    .step, .life-card, .benefit, .integ-card{
+      display:grid; grid-template-columns:40px 1fr; column-gap:14px; row-gap:4px; align-items:start;
+      padding:16px; border-radius:14px;
+    }
+    .step-num, .life-icon, .benefit-icon, .integ-icon{grid-row:span 2; margin:0; width:40px; height:40px;}
+    .integ-icon{font-size:20px;}
+    .step h3, .life-card h3, .benefit h3, .integ-card h3{font-size:16px; margin:0; align-self:center;}
+    .step p, .life-card p, .benefit p, .integ-card p{font-size:14px; line-height:1.5;}
+    .benefit:hover{transform:none;}
+
+    .dash-visual{padding:16px;}
+    .dash-visual-head{gap:10px; align-items:flex-start;}
+    .dash-features li{padding:12px 14px;}
+
+    .process-card{padding:24px 18px; border-radius:20px;}
+    .process-steps{gap:18px; margin-bottom:24px;}
+    .process-step{display:grid; grid-template-columns:38px 1fr; column-gap:14px; row-gap:4px;}
+    .process-num{grid-row:span 2; margin:0;}
+    .process-step h3{align-self:center; margin:0;}
+    .process-cta .btn{width:100%;}
+
+    .faq-q{padding:16px 18px; font-size:15px;}
+    .faq-a p{padding:0 18px 16px;}
+
+    .cta-card{padding:32px 20px;}
+    .cta-card h2{font-size:26px;}
+    .cta-buttons{flex-direction:column; gap:10px;}
+    .cta-buttons .btn{width:100%;}
+
+    footer{padding:28px 0 96px;}
+    .foot-row{flex-direction:column; align-items:flex-start; gap:12px;}
+
+    /* sticky bottom CTA */
+    .mobile-cta{
+      display:flex; gap:8px; position:fixed; left:0; right:0; bottom:0; z-index:40;
+      padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+      background:rgba(14,23,18,0.92); backdrop-filter:blur(10px); border-top:1px solid var(--border);
+      transform:translateY(110%); transition:transform .25s ease;
+    }
+    .mobile-cta.show{transform:translateY(0);}
+    .mobile-cta .btn-primary{flex:1; padding:13px 16px;}
+    .mobile-cta .btn-ghost{padding:13px 16px;}
+    .back-to-top{display:none;}
+  }
+  @keyframes marquee{ to{ transform:translateX(calc(-50% - 5px)); } }
+  @media (prefers-reduced-motion: reduce){
+    .logos-row{animation:none !important; flex-wrap:wrap !important; justify-content:center !important; width:auto !important;}
+    .logo-pill.dup{display:none !important;}
+  }
 </style>
 </head>
 <body>
@@ -781,6 +877,12 @@
     <div class="logo-pill">🦷 Dentistas</div>
     <div class="logo-pill">🩺 Consultórios</div>
     <div class="logo-pill">🐾 Pet Shops</div>
+    <div class="logo-pill dup" aria-hidden="true">💈 Barbearias</div>
+    <div class="logo-pill dup" aria-hidden="true">💇 Salões de Beleza</div>
+    <div class="logo-pill dup" aria-hidden="true">✨ Clínicas de Estética</div>
+    <div class="logo-pill dup" aria-hidden="true">🦷 Dentistas</div>
+    <div class="logo-pill dup" aria-hidden="true">🩺 Consultórios</div>
+    <div class="logo-pill dup" aria-hidden="true">🐾 Pet Shops</div>
   </div>
 </section>
 
@@ -1115,6 +1217,11 @@
   </div>
 </footer>
 
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração</a>
+  <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg class="wa-ico" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Falar</a>
+</div>
+
 <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
@@ -1431,9 +1538,18 @@
 
   // Back to top button
   const backToTop = document.getElementById('backToTop');
+  const mobileCta = document.getElementById('mobileCta');
+  const heroCtas = document.querySelector('.hero-ctas');
+  const ctaBand = document.getElementById('contato');
   window.addEventListener('scroll', () => {
     backToTop.classList.toggle('show', window.scrollY > 600);
-  });
+    if(mobileCta && heroCtas){
+      // show the sticky bar once the hero buttons scroll away, hide it near the final CTA block
+      const pastHero = heroCtas.getBoundingClientRect().bottom < 0;
+      const atEnd = ctaBand && ctaBand.getBoundingClientRect().top < window.innerHeight;
+      mobileCta.classList.toggle('show', pastHero && !atEnd);
+    }
+  }, { passive:true });
   backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 </script>
 

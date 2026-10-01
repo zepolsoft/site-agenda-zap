@@ -5,24 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AgendaZap — Sua agenda no piloto automático, direto no WhatsApp</title>
 <meta name="description" content="AgendaZap usa Inteligência Artificial para agendar, confirmar e lembrar seus clientes automaticamente pelo WhatsApp. Ideal para barbearias, salões de beleza, clínicas de estética, dentistas, consultórios e pet shops.">
-<link rel="canonical" href="https://agendazap.com.br/">
+<link rel="canonical" href="https://agendazap.wg1izd.easypanel.host/">
+<meta property="og:url" content="https://agendazap.wg1izd.easypanel.host/">
 
 <!-- Open Graph / social preview -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AgendaZap">
 <meta property="og:title" content="AgendaZap — Sua agenda no piloto automático, direto no WhatsApp">
 <meta property="og:description" content="IA que agenda, confirma e lembra seus clientes automaticamente pelo WhatsApp — sem app novo, sem ninguém parado no telefone.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://agendazap.wg1izd.easypanel.host/og-image.png">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AgendaZap — Sua agenda no piloto automático, direto no WhatsApp">
 <meta name="twitter:description" content="IA que agenda, confirma e lembra seus clientes automaticamente pelo WhatsApp.">
-<meta name="twitter:image" content="og-image.png">
+<meta name="twitter:image" content="https://agendazap.wg1izd.easypanel.host/og-image.png">
 
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta name="theme-color" content="#0E1712">
 
+<script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap">
 
@@ -37,7 +39,7 @@
   "offers": {
     "@type": "Offer",
     "priceCurrency": "BRL",
-    "url": "https://wa.me/5511925022244"
+    "url": "https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap."
   }
 }
 </script>
@@ -172,8 +174,10 @@
   }
   .btn-primary{ background:var(--orange); color:#1B1305; box-shadow:0 8px 24px rgba(231,163,62,0.25);}
   .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(231,163,62,0.35);}
-  .btn-ghost{ border-color:var(--border); color:var(--cream); }
-  .btn-ghost:hover{ background:rgba(242,236,221,0.06); }
+  .btn-ghost{ border:1.5px solid rgba(242,236,221,0.55); background:rgba(242,236,221,0.07); color:var(--cream); }
+  .btn-ghost:hover{ background:rgba(242,236,221,0.14); border-color:var(--cream); transform:translateY(-2px); }
+  .btn-ghost .wa-ico{color:#4ADE80; flex:none;}
+  .btn:focus-visible{outline:2px solid var(--orange); outline-offset:3px;}
 
   /* mobile dropdown menu */
   .mobile-menu{
@@ -203,16 +207,20 @@
   .badge svg{width:14px; height:14px;}
   .hero h1{font-size:52px; letter-spacing:-0.01em; margin-bottom:20px;}
   .hero h1 .accent{color:var(--orange);}
-  .hero p.lead{font-size:18px; max-width:480px; margin-bottom:32px;}
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
-  .hero-note{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--cream-dim); margin-bottom:14px;}
-  .hero-note svg{color:var(--mint); flex:none;}
-  .hero-more-link{display:inline-block; font-size:13.5px; color:var(--cream-dim); text-decoration:underline; text-underline-offset:3px; margin-bottom:28px;}
-  .hero-more-link:hover{color:var(--cream);}
-  .verticals-inline{display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:var(--cream-dim);}
-  .verticals-inline span{
-    padding:6px 12px; border:1px solid var(--border); border-radius:100px; background:rgba(255,255,255,0.03);
+  .hero p.lead{font-size:18px; max-width:480px; margin-bottom:24px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px;}
+  .hero-checks{list-style:none; margin:0 0 30px; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .hero-checks li{display:flex; align-items:flex-start; gap:10px; font-size:16px; font-weight:500; color:var(--cream); line-height:1.4;}
+  .hero-checks svg{color:var(--mint); flex:none; margin-top:2px;}
+  .hero-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .hero-pills span{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:6px 12px; border-radius:100px; font-size:13px; font-weight:600;
+    border:1px solid rgba(74,222,128,0.30); background:rgba(37,211,102,0.10); color:#4ADE80;
+    cursor:default; user-select:none;
   }
+  .hero-checks li.lead-check{font-size:17px; font-weight:700;}
+  .logos-title{text-align:center; font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--cream-dim); margin:0 0 16px;}
 
   /* chat mock — estilo WhatsApp (modo escuro) */
   :root{
@@ -354,8 +362,9 @@
   .eyebrow{display:block; color:var(--orange); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px;}
   .section-head h2{font-size:36px; margin-bottom:14px;}
 
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
+  .js .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  @media (prefers-reduced-motion: reduce){ .js .reveal{opacity:1; transform:none; transition:none;} }
+  .js .reveal.in{opacity:1; transform:translateY(0);}
 
   .how{padding:72px 0;}
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
@@ -453,6 +462,20 @@
   .cal-cell .ev.m{background:var(--mint); opacity:.85;}
   .cal-cell .ev.b{background:var(--blue); opacity:.85;}
   .cal-cell.empty{opacity:.35;}
+  .cal-cell.pad{background:transparent; border-color:transparent;}
+  .cal-card{display:flex; flex-direction:column;}
+  .cal-legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:11.5px; color:var(--cream-dim);}
+  .cal-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .cal-legend i{width:12px; height:4px; border-radius:2px; display:inline-block;}
+  .cal-legend i.o{background:var(--orange-dim);} .cal-legend i.m{background:var(--mint);} .cal-legend i.b{background:var(--blue);}
+  .cal-next{margin-top:auto; padding-top:16px;}
+  .cal-next-title{font-size:11px; color:var(--cream-dim); margin-bottom:8px;}
+  .cal-next-row{display:flex; align-items:center; gap:12px; padding:9px 12px; background:var(--panel-2); border-radius:10px; margin-bottom:6px; font-size:13px;}
+  .cal-next-row .t{font-weight:700; color:var(--cream); font-variant-numeric:tabular-nums;}
+  .cal-next-row .n{color:var(--cream-dim); flex:1; min-width:0;}
+  .cal-next-row .tag{font-size:10.5px; font-weight:700; padding:3px 8px; border-radius:100px; white-space:nowrap;}
+  .cal-next-row .tag.ok{background:rgba(110,231,183,0.12); color:var(--mint);}
+  .cal-next-row .tag.wait{background:rgba(231,163,62,0.14); color:var(--orange);}
 
   /* dashboard mockup */
   .dash-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:18px;}
@@ -507,7 +530,7 @@
   .faq-item.open .faq-q .chevron{transform:rotate(180deg);}
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
   .faq-a p{padding:0 22px 20px; font-size:14.5px;}
-  .faq-item.open .faq-a{max-height:220px;}
+  .faq-item.open .faq-a{max-height:400px;}
 
   .offer{padding:72px 0;}
   .process-card{
@@ -600,7 +623,7 @@
           <path d="M62 2 L14 58 H46 L38 98 L86 42 H54 Z" fill="#E7A33E" stroke="#0E1712" stroke-width="3" stroke-linejoin="round"/>
         </g>
       </svg>
-      Agenda<span class="zap">Zap</span>
+      <span>Agenda<span class="zap">Zap</span></span>
     </div>
     <nav class="nav-links">
       <a href="#como-funciona">Como funciona</a>
@@ -613,15 +636,15 @@
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-right">
-      <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração</a>
+      <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração</a>
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
   <nav class="mobile-menu" id="mobileMenu">
-    <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
-    <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
+    <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração →</a>
+    <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener"><svg class="wa-ico" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Quero saber mais</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#pos-agendamento">Lembretes e remarcação</a>
     <a href="#beneficios">Benefícios</a>
@@ -642,18 +665,20 @@
       </span>
       <h1>Sua agenda funciona <span class="accent">sozinha</span>, direto no WhatsApp.</h1>
       <p class="lead">O AgendaZap usa IA pra conversar com seus clientes, marcar, confirmar e lembrar horários automaticamente — sem ligação, sem app novo, sem ninguém da equipe parado no telefone.</p>
+      <ul class="hero-checks">
+        <li class="lead-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Atende seus clientes enquanto você trabalha</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Encontra o horário livre sem vai e volta de mensagens</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Lembra o cliente e evita falta</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancela e remarca sozinho, direto na sua agenda</li>
+      </ul>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
-        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
+        <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração →</a>
+        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener"><svg class="wa-ico" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Quero saber mais</a>
       </div>
-      <div class="hero-note">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Sem instalar nada — funciona no WhatsApp que você já usa
-      </div>
-      <a class="hero-more-link" href="#como-funciona">Ver como funciona ↓</a>
-      <div class="verticals-inline">
-        <span>Barbearias</span><span>Salões de Beleza</span><span>Clínicas de Estética</span>
-        <span>Dentistas</span><span>Consultórios</span><span>Pet Shops</span>
+      <div class="hero-pills">
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>100% no WhatsApp</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Sem instalar nada</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Atende 24h</span>
       </div>
     </div>
 
@@ -748,6 +773,7 @@
 </section>
 
 <section class="logos">
+  <p class="logos-title">Feito sob medida para</p>
   <div class="wrap logos-row">
     <div class="logo-pill">💈 Barbearias</div>
     <div class="logo-pill">💇 Salões de Beleza</div>
@@ -902,49 +928,30 @@
 <section class="dash-preview" id="dashboard">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Em breve no seu Setup</span>
+      <span class="eyebrow">Incluso no seu Setup</span>
       <h2>Acompanhe agenda e faturamento em tempo real</h2>
-      <p>Direto do seu Google Sheets, sem planilha manual: um painel simples pra ver como o negócio está indo — hoje, na semana, no mês ou no ano.</p>
+      <p>Sem planilha manual: um painel simples pra ver como o negócio está indo — hoje, na semana, no mês ou no ano.</p>
     </div>
     <div class="dash-grid">
-      <div class="dash-visual reveal">
+      <div class="dash-visual cal-card reveal">
         <div class="dash-visual-head">
           <div>
-            <strong>Setembro 2026</strong>
+            <strong id="calTitle">Agenda do mês</strong>
             <div class="dash-visual-sub">Sua agenda no Google Calendar</div>
           </div>
-          <span class="dash-visual-badge">89% ocupada</span>
+          <span class="dash-visual-badge" id="calBadge">Agenda cheia</span>
         </div>
-        <div class="cal-grid">
+        <div class="cal-grid" id="calGrid">
           <span class="cal-dow">Dom</span><span class="cal-dow">Seg</span><span class="cal-dow">Ter</span><span class="cal-dow">Qua</span><span class="cal-dow">Qui</span><span class="cal-dow">Sex</span><span class="cal-dow">Sáb</span>
-          <div class="cal-cell"><span class="d">1</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell"><span class="d">2</span><span class="ev o"></span></div>
-          <div class="cal-cell"><span class="d">3</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">4</span><span class="ev m"></span></div>
-          <div class="cal-cell empty"><span class="d">5</span></div>
-          <div class="cal-cell"><span class="d">6</span><span class="ev o"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">7</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell"><span class="d">8</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">9</span><span class="ev o"></span></div>
-          <div class="cal-cell"><span class="d">10</span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">11</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell empty"><span class="d">12</span></div>
-          <div class="cal-cell"><span class="d">13</span><span class="ev o"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">14</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">15</span><span class="ev m"></span></div>
-          <div class="cal-cell"><span class="d">16</span><span class="ev o"></span></div>
-          <div class="cal-cell"><span class="d">17</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell"><span class="d">18</span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">19</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell empty"><span class="d">20</span></div>
-          <div class="cal-cell"><span class="d">21</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell"><span class="d">22</span><span class="ev o"></span></div>
-          <div class="cal-cell"><span class="d">23</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">24</span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">25</span><span class="ev o"></span></div>
-          <div class="cal-cell"><span class="d">26</span><span class="ev o"></span><span class="ev m"></span></div>
-          <div class="cal-cell today"><span class="d">27</span><span class="ev o"></span><span class="ev m"></span><span class="ev b"></span></div>
-          <div class="cal-cell"><span class="d">28</span><span class="ev o"></span></div>
+        </div>
+        <div class="cal-legend">
+          <span><i class="o"></i>Profissional 1</span><span><i class="m"></i>Profissional 2</span><span><i class="b"></i>Profissional 3</span>
+        </div>
+        <div class="cal-next">
+          <div class="cal-next-title">Próximos horários de hoje</div>
+          <div class="cal-next-row"><span class="t">14:00</span><span class="n">Corte + barba</span><span class="tag ok">Confirmado</span></div>
+          <div class="cal-next-row"><span class="t">15:30</span><span class="n">Corte</span><span class="tag ok">Confirmado</span></div>
+          <div class="cal-next-row"><span class="t">17:00</span><span class="n">Barba</span><span class="tag wait">Lembrete enviado</span></div>
         </div>
       </div>
 
@@ -1054,23 +1061,23 @@
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q"><span>Preciso instalar algum aplicativo?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="faq-q" type="button" aria-expanded="false"><span>Preciso instalar algum aplicativo?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p>Não. O AgendaZap funciona dentro do WhatsApp que o seu negócio já usa — não é preciso instalar nada, nem para você, nem para o cliente.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>Funciona pra qualquer tipo de negócio?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="faq-q" type="button" aria-expanded="false"><span>Funciona pra qualquer tipo de negócio?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p>É configurado sob medida para o seu segmento — barbearias, salões de beleza, clínicas de estética, dentistas, consultórios e pet shops — com os serviços, preços e horários reais do seu estabelecimento.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>E se o cliente quiser cancelar ou remarcar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="faq-q" type="button" aria-expanded="false"><span>E se o cliente quiser cancelar ou remarcar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p>A mesma conversa no WhatsApp resolve: o cliente pede a mudança, a IA confere a agenda e confirma — sem precisar ligar ou falar com alguém da equipe.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>Como o AgendaZap evita que o cliente falte?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="faq-q" type="button" aria-expanded="false"><span>Como o AgendaZap evita que o cliente falte?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p>Envia lembretes automáticos antes do horário marcado, e se o cliente responder pedindo para cancelar ou remarcar, a agenda já é atualizada na hora.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q"><span>Minha agenda continua no Google Calendar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="faq-q" type="button" aria-expanded="false"><span>Minha agenda continua no Google Calendar?</span><svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="faq-a"><p>Sim. O AgendaZap se integra ao Google Calendar e mantém uma planilha organizada com o histórico de todos os agendamentos, sem trabalho manual.</p></div>
       </div>
     </div>
@@ -1083,8 +1090,8 @@
       <h2>Pronto pra sua agenda trabalhar sozinha?</h2>
       <p>Testa a demonstração no WhatsApp e veja como fica o AgendaZap funcionando, ou fala direto comigo pra colocar no seu negócio.</p>
       <div class="cta-buttons">
-        <a class="btn btn-primary" href="https://wa.me/5511925022244" target="_blank" rel="noopener">Testar demonstração →</a>
-        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener">Quero saber mais</a>
+        <a class="btn btn-primary" href="https://wa.me/5511925022244?text=Oi!%20Vim%20pelo%20site%20e%20quero%20testar%20a%20demonstra%C3%A7%C3%A3o%20do%20AgendaZap." target="_blank" rel="noopener">Testar demonstração →</a>
+        <a class="btn btn-ghost" href="https://wa.me/5511975049937" target="_blank" rel="noopener"><svg class="wa-ico" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>Quero saber mais</a>
       </div>
     </div>
   </div>
@@ -1197,6 +1204,32 @@
     const h = String(now.getHours()).padStart(2, '0');
     const m = String(now.getMinutes()).padStart(2, '0');
     el.textContent = h + ':' + m;
+  })();
+
+  // Calendar mock: always shows the visitor's current month, with today highlighted
+  (function renderCalendar(){
+    const grid = document.getElementById('calGrid');
+    if(!grid) return;
+    const now = new Date();
+    const y = now.getFullYear(), mo = now.getMonth(), today = now.getDate();
+    const first = new Date(y, mo, 1).getDay();
+    const days = new Date(y, mo + 1, 0).getDate();
+    const title = now.toLocaleDateString('pt-BR', {month:'long', year:'numeric'}).replace(' de ', ' ');
+    document.getElementById('calTitle').textContent = title.charAt(0).toUpperCase() + title.slice(1);
+    let html = '';
+    for(let i = 0; i < first; i++) html += '<div class="cal-cell pad" aria-hidden="true"></div>';
+    let busy = 0, open = 0;
+    for(let d = 1; d <= days; d++){
+      const dow = (first + d - 1) % 7;
+      if(dow === 0){ html += '<div class="cal-cell empty"><span class="d">' + d + '</span></div>'; continue; }
+      open++;
+      const n = [3,2,3,1,3,2,3][(d * 5 + mo) % 7];  // deterministic, so the mock looks the same on reload
+      const evs = ['o','m','b'].slice(0, n);
+      busy += n;
+      html += '<div class="cal-cell' + (d === today ? ' today' : '') + '"><span class="d">' + d + '</span>' + evs.map(c => '<span class="ev ' + c + '"></span>').join('') + '</div>';
+    }
+    grid.insertAdjacentHTML('beforeend', html);
+    document.getElementById('calBadge').textContent = Math.round(busy / (open * 3) * 100) + '% ocupada';
   })();
 
   // Dashboard preview: period tabs with mock data (real thing comes tomorrow, ligado ao Google Sheets)
@@ -1380,8 +1413,8 @@
   document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-      if(!isOpen) item.classList.add('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => { el.classList.remove('open'); el.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if(!isOpen){ item.classList.add('open'); item.querySelector('.faq-q').setAttribute('aria-expanded','true'); }
     });
   });
 
